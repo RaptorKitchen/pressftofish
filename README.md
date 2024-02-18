@@ -3,8 +3,9 @@
 
 Press F to Fish is a simple web game by Andrew Lerma. In this game you will:
 
-- Learn about fish
+- Press F to fish
 - Appreciate the beauty of nature
+- Learn about fish
 - Learn about others; and
 - Learn about yourself
 
