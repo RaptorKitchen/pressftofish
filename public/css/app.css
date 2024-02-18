@@ -1,0 +1,60 @@
+@font-face {
+    font-family: 'VT323-Regular';
+    src: url('../fonts/VT323-Regular.ttf') format('truetype');
+}
+html {
+    background: #feefcc;
+}
+.amarante-regular {
+    font-family: "Amarante", serif;
+    font-weight: 400;
+    font-style: normal;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+  }
+  
+
+body {
+    /*background: #c7e6c6;*/
+    background: #feefcc;
+    color:#faebd7;
+    font-family: "Amarante", serif;  
+    transition: opacity 0.5s ease-in-out;  
+}
+
+#background-container {
+    background-image: url('/images/background.webp');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#about-text-container {
+    background: #fff;
+    padding: 5%;
+    border-radius: 10px;
+    color: #333;
+}
+
+.gray-link {
+    color: #333;
+}
+
+@keyframes waveAnimation {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+.animate-text {
+    display: inline-block;
+    position: relative;
+    animation: waveAnimation 6s infinite alternate;
+}
+
+.transition-effect {
+    opacity: 0;
+}
