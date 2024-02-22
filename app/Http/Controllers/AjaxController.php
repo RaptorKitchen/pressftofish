@@ -17,7 +17,11 @@ class AjaxController extends Controller
 
         switch ($route) {
             case 'start':
-                $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"l\":\"leave-cabin\"}'>Press L to Leave</h1>";
+                $elements = "
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"l\":\"leave-cabin\"}' style='right:60px; position:absolute;'>Press L to Leave</h1>
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"appreciate-world\"}' style='left:750px; top: 260px position:absolute;'>Press A to Appreciate the world</h1>
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"e\":\"use-mirror\"}' style='left:180px; bottom:160px; position:absolute;'>Press E to Enter the bathroom</h1>
+                ";
                 $background = "./images/cabin-interior.webp";
                 break;
             case 'leave-cabin':
@@ -26,6 +30,16 @@ class AjaxController extends Controller
                 $autoTransitionLength = 2;
                 $autoTransitionDestination = "interior-fish";
                 break;
+            case 'appreciate-world':
+                //TODO: survey - how do you see the world? place of opportunity, possibility, danger
+                $elements = "";
+                $background = "./images/off-to-fish.webp";
+                break;
+            case 'use-mirror':
+                //TODO: survey - what do you see in self, what troubles you, what are your goals
+                $elements = "";
+                $background = "./images/off-to-fish.webp";
+                break;                
             case 'interior-fish':
                 $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"f\":\"attempt-fish\"}'>Press F to Fish</h1>";
                 $background = "./images/fishing-view.webp";

@@ -16,36 +16,47 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>
-    <body class="antialiased">
-        <div id="fullPageModal" class="modal">
-            <img src="./images/fish-caught-background.jpg" class="fallingDown"> <!-- For falling straight down -->
-            <img src="./images/fish-caught-background.jpg" class="movingDiagonally"> <!-- For moving diagonally up and right -->
-            <div class="modal-content">
-                <div class="close"></div>
-                <div id="resultText">
+    <body class="antialiased fishing-background">
+        <div class="gradient-background">
+            <div class="content-container">
+                <div id="fullPageModal" class="modal diamondBackground">
+                    <div class="modal-content">
+                        <div class="close"></div>
+                        <div class="content-wrapper">
+                            <div id="resultText">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="text-center">
-                <div class="row">
-                    <div class="col-12">
-                        <img src="./images/pftf-logo.png" class="m-2 text-center img-responsive" width="150"/>
+                <div class="container">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="./images/pftf-logo.png" class="m-2 text-center img-responsive" width="150"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <center>
+                                <div id="fishArea">
+                                    <div id="fisher"></div>
+                                    <div id="line"></div>
+                                    <img src="/images/lure.png" id="lure" class="lure">
+                                    <div class="fish" style="top: 300px; left: 200px;"></div>
+                                    <div class="fish" style="top: 250px; left: 400px;"></div>
+                                    <div class="fish" style="top: 450px; left: 600px;"></div>
+                                    <div class="rock" style="top: 200px; left: 100px;"></div>
+                                </div>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <center>
-                        <div id="fishArea">
-                            <div id="fisher"></div>
-                            <div id="line"></div>
-                            <div class="fish" style="top: 300px; left: 200px;"></div>
-                            <div class="fish" style="top: 250px; left: 400px;"></div>
-                            <div class="rock" style="top: 200px; left: 100px;"></div>
-                        </div>
-                    </center>
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="fishing-bottom-panel"></div>
             </div>
         </div>
         <script src="{{ asset('js/fish.js') }}"></script>

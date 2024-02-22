@@ -6,8 +6,8 @@ let score = 0;
 let lineAngle = 0;
 let lineDirection = 1; // 1 for down, -1 for up
 let swingDirection = 1; // 1 for right, -1 for left
-let lineLength = 50;
-let lineMaxLength = 300;
+let lineLength = 5;
+let lineMaxLength = 500;
 let lineSpeed = 2;
 let swingSpeed = 2;
 let isLineMoving = false;
@@ -18,14 +18,19 @@ function swingLine() {
     if (!isSwinging) return;
 
     lineAngle += swingDirection * swingSpeed;
-    if (lineAngle > 45 || lineAngle < -45) {
+
+    if (lineAngle > 85 || lineAngle < -85) {
         swingDirection *= -1; // Reverse the direction of the swing
     }
 
     line.style.transform = `translateX(-50%) rotate(${lineAngle}deg)`;
+
+    // Update the position and rotation of the lure
+    let lure = document.getElementById('lure');
+    lure.style.transform = `translate(-50%, ${lineLength - 25}px) rotate(${lineAngle * 0.5}deg)`;
 }
 
-function moveLine() {
+function castLine() {
     if (!isLineMoving) return;
 
     if (lineDirection === 1) {
@@ -53,6 +58,10 @@ function moveLine() {
     line.style.height = lineLength + 'px';
     line.style.transform = `translateX(-50%) rotate(${lineAngle}deg)`;
     checkCollision(); // Ensure collision check is performed during extension
+
+    // Update the position of the lure
+    let lure = document.getElementById('lure');
+    lure.style.transform = `translate(-50%, ${lineLength - 25}px) rotate(${lineAngle * 0.5}deg)`;
 }
 
 function showModal() {
@@ -154,5 +163,5 @@ document.addEventListener('keydown', function(event) {
 
 // TODO: increase swing when intoxicated
 setInterval(swingLine, 50);
-setInterval(moveLine, 20);
+setInterval(castLine, 20);
  

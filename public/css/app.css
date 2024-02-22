@@ -22,6 +22,24 @@ body {
     transition: opacity 0.5s ease-in-out;  
 }
 
+.fishing-background {
+    background: #1f130c;
+    overflow: hidden;
+}
+
+.gradient-background {
+    background: url('/images/regal.png'), linear-gradient(to bottom, #feefcc 0%, #1f130c 80%);
+    background-repeat: repeat, no-repeat;
+}
+
+
+.fishing-bottom-panel {
+    background: #1f130c;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
 #background-container {
     background-image: url('/images/pftf-cabin.gif');
     background-size: contain;
@@ -63,7 +81,9 @@ body {
     position: relative;
     width: 1000px;
     height: 600px;
-    background-image: url('./images/underwater.jpg') center no-repeat;
+    background-image: url('/images/underwater.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 #fisher {
@@ -103,26 +123,48 @@ body {
     background-color: #808080;
 }
 
+.diamondBackground {
+    background-image: url('/images/fish-caught-background.jpg');
+    background-size: 200px 200px; /* Adjust the size of the tiles */
+    background-repeat: repeat;
+    transform: rotate(45deg); /* Rotate the tiles to form diamonds */
+    animation: scrollDiagonally 10s linear infinite; /* Adjust the duration as needed */
+}
+
 .modal {
     display: none;
     position: fixed;
     z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    left: -348%;
+    top: -150%;
+    width: 800%;
+    height: 400%;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-    background-color: #fff;
+    background-color: transparent; /* Make modal-content background transparent */
+    transform: rotate(-45deg);
     margin: 0; /* Full-page modal */
     padding: 20px;
     height: 100%; /* Full-page modal */
     overflow: auto; /* Enable scroll if needed */
     color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.content-wrapper {
+    background-color: #fff; /* Set the background color of the inner content to white */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 10px; /* Optional: for rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: for a subtle shadow */
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px; /* Adjust max width as needed */
+}
+
 
 .close {
     color: #aaa;
@@ -138,31 +180,22 @@ body {
     cursor: pointer;
 }
 
-/* For rotating and falling straight down */
-@keyframes rotateAndFallDown {
+.lure {
+    position: absolute;
+    width: 50px; /* Adjust the size of the lure */
+    height: auto;
+    transform-origin: top center;
+    z-index: 10; /* Ensure the lure is above the line */
+    top: 20px;
+}
+
+@keyframes scrollDiagonally {
     0% {
-        transform: rotate(0deg) translateY(0);
+        background-position: 10vw 25vh;
     }
     100% {
-        transform: rotate(45deg) translateY(100vh); /* Adjust the translateY value as needed */
+        background-position: 10vw -100vh;
     }
 }
 
-.fallingDown {
-    animation: rotateAndFallDown 5s linear infinite; /* Adjust the duration as needed */
-}
-
-/* For rotating and moving diagonally up and right */
-@keyframes rotateAndMoveDiagonally {
-    0% {
-        transform: rotate(0deg) translate(0, 0);
-    }
-    100% {
-        transform: rotate(45deg) translate(100vw, -100vh); /* Adjust the translate values as needed */
-    }
-}
-
-.movingDiagonally {
-    animation: rotateAndMoveDiagonally 5s linear infinite; /* Adjust the duration as needed */
-}
 
