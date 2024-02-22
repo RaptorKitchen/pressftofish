@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('fish', function (Blueprint $table) {
+            $table->string('size')->nullable();
+            $table->string('image_url');
+        });
     }
 
     /**
@@ -19,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('fish', function (Blueprint $table) {
+            $table->dropColumn('size');
+            $table->dropColumn('image_url');
+        });
     }
 };

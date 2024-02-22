@@ -22,4 +22,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/fish', function () {
+    return view('fishing');
+})->name('fishing');
+
 Route::get('/ajax/{route}', [AjaxController::class, 'handleRequest']);

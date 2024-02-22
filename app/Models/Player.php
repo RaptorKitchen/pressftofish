@@ -17,50 +17,18 @@ class Player extends Model
     protected $primaryKey = 'player_id';
 
     /**
+     * The attributes that are mass assignable.
      *
-     * @var integer
+     * @var array
      */
-    protected $userId = 'user_id';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $strength = 'strength';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $dexterity = 'dexterity';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $constitution = 'constitution';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $intelligence = 'intelligence';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $wisdom = 'wisdom';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $charisma = 'charisma';
-
-     /**
-     *
-     * @var integer
-     */
-    protected $conformity = 'conformity';
+    protected $fillable = [
+        'user_id',
+        'strength',
+        'dexterity',
+        'constitution',
+        'intelligence',
+        'wisdom',
+        'charisma',
+        'conformity'
+    ];
 }

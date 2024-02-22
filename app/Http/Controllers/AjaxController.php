@@ -9,8 +9,11 @@ class AjaxController extends Controller
     public function handleRequest($route)
     {
         // Implement logic for handling different AJAX routes
+        $elements = "";
+        $background = "";
         $autoTransitionLength = 0;
         $autoTransitionDestination = "";
+        $redirectTo = "";
 
         switch ($route) {
             case 'start':
@@ -29,11 +32,7 @@ class AjaxController extends Controller
                 break;
             case 'attempt-fish':
                 //run random fish attempt, include livewell storage $this->attemptFish($livewell)
-                $elements = "
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"r\":\"release-fish\"}'>Press R to Release</h1>
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"s\":\"store-fish\"}'>Press S to Store in Livewell</h1>
-                ";
-                $background = "./images/fishing-view.webp";
+                $redirectTo = route('fishing');
                 break;
             default:
                 // Handle unknown routes
@@ -45,7 +44,8 @@ class AjaxController extends Controller
             'elements' => $elements,
             'background' => $background,
             'autoTransition' => $autoTransitionLength,
-            'autoTransitionDestination' => $autoTransitionDestination
+            'autoTransitionDestination' => $autoTransitionDestination,
+            'redirectTo' => $redirectTo
         ]);
     }
 

@@ -14,23 +14,16 @@ class Livewell extends Model
      *
      * @var integer
      */
-    protected $primaryKey = 'journal_id';
+    protected $primaryKey = 'livewell_id';
 
     /**
+     * The attributes that are mass assignable.
      *
-     * @var integer
+     * @var array
      */
-    protected $playerId = 'player_id';
-
-    /**
-     *
-     * @var integer
-     */
-    protected $maximum = 'maximum';
-
-    /**
-     *
-     * @var string
-     */
-    protected $livewellJson = 'livewell_json';
+    protected $fillable = [
+        'player_id',
+        'maximum',
+        'livewell_json'
+    ];
 }

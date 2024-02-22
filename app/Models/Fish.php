@@ -12,42 +12,25 @@ class Fish extends Model
     /**
      * The primary key associated with the table.
      *
-     * @var integer
+     * @var string
      */
     protected $primaryKey = 'fish_id';
 
     /**
-    * @var string
-    */
-    protected $name = 'name';
-
-    /**
-    * @var string
-    */
-    protected $latinName = 'latin_name';
-
-    /**
-    * @var string
-    */
-   protected $chanceRange = 'chance_range';
-
-    /**
-    * @var string
-    */
-    protected $activeTimeOfDay = 'active_time_of_day';
-
-    /**
-    * @var integer
-    */
-    protected $population = 'population';
-
-    /**
-    * @var string
-    */
-    protected $season = 'season';
-
-    /**
-    * @var string
-    */
-    protected $description = 'description';
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'latin_name',
+        'chance_range_start',
+        'chance_range_end',
+        'active_time_of_day_start',
+        'active_time_of_day_end',
+        'population',
+        'season',
+        'description',
+        'image_url'
+    ];
 }
