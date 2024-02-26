@@ -39,12 +39,12 @@ $(document).keypress(function(event) {
                                     bodyTransition(response.background);
                                 }
                             })
-                            if (response.redirectTo) {
-                                setTimeout(() => {
-                                    console.log(response.redirectTo);
-                                    window.location=response.redirectTo;
-                                }, 6000);
-                            }
+                        }, 4000);
+                    }
+                    if (response.redirectTo) {
+                        setTimeout(() => {
+                            console.log(response.redirectTo);
+                            window.location=response.redirectTo;
                         }, 4000);
                     }
                 },

@@ -1,12 +1,14 @@
 let line = document.getElementById('line');
 let fishElements = document.getElementsByClassName('fish');
 let rockElements = document.getElementsByClassName('rock');
+let lure = document.getElementById('lure');
 let score = 0;
 
 let lineAngle = 0;
 let lineDirection = 1; // 1 for down, -1 for up
 let swingDirection = 1; // 1 for right, -1 for left
-let lineLength = 5;
+let lineLength = 25; // this val changes when cast
+let initialLineLength = 25; //this is the default length
 let lineMaxLength = 500;
 let lineSpeed = 2;
 let swingSpeed = 2;
@@ -26,7 +28,6 @@ function swingLine() {
     line.style.transform = `translateX(-50%) rotate(${lineAngle}deg)`;
 
     // Update the position and rotation of the lure
-    let lure = document.getElementById('lure');
     lure.style.transform = `translate(-50%, ${lineLength - 25}px) rotate(${lineAngle * 0.5}deg)`;
 }
 
@@ -40,7 +41,7 @@ function castLine() {
             lineDirection = -1;
         }
     } else {
-        if (lineLength > 50) {
+        if (lineLength > initialLineLength) {
             lineLength -= lineSpeed;
         } else {
             lineDirection = 1;
@@ -59,11 +60,61 @@ function castLine() {
     line.style.transform = `translateX(-50%) rotate(${lineAngle}deg)`;
     checkCollision(); // Ensure collision check is performed during extension
 
-    // Update the position of the lure
-    let lure = document.getElementById('lure');
-    lure.style.transform = `translate(-50%, ${lineLength - 25}px) rotate(${lineAngle * 0.5}deg)`;
+    // Update the position and rotation of the lure to match the line
+    let deltaX = lineLength * Math.sin(-lineAngle * Math.PI / 180); // Negate the angle for correct direction
+    let deltaY = lineLength * Math.cos(-lineAngle * Math.PI / 180); // Negate the angle for correct direction
+    lure.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${lineAngle}deg)`;
 }
 
+function retractLine() {
+    isLineMoving = true;
+    lineDirection = -1;
+}
+
+function checkCollision() {
+    let lineRect = line.getBoundingClientRect();
+    if (lineDirection === 1) { // Check collision only when line is moving down
+        for (let fish of fishElements) {
+            let fishRect = fish.getBoundingClientRect();
+            if (lineRect.right > fishRect.left && lineRect.left < fishRect.right && lineRect.bottom > fishRect.top && lineRect.top < fishRect.bottom) {
+                // TODO: AJAX request to retrieve random fish in allowed time and season
+                // TODO: compare energy of fisherman with weight of fish attempted, run dice roll to determine success
+                caughtElement = fish;
+                lineDirection = -1; // Stop extending and start retracting
+                break;
+            }
+        }
+
+        for (let rock of rockElements) {
+            let rockRect = rock.getBoundingClientRect();
+            if (lineRect.right > rockRect.left && lineRect.left < rockRect.right && lineRect.bottom > rockRect.top && lineRect.top < rockRect.bottom) {
+                caughtElement = rock;
+                lineDirection = -1; // Stop extending and start retracting
+                break;
+            }
+        }
+    }
+}
+
+function startLineMovement() {
+    if (!isLineMoving) {
+        isLineMoving = true;
+        isSwinging = false;
+        lineDirection = 1;
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === ' ' && !isLineMoving) {
+        startLineMovement();
+    }
+});
+
+// TODO: increase swing when intoxicated
+setInterval(swingLine, 50);
+setInterval(castLine, 20);
+
+//modal code
 function showModal() {
     let modal = document.getElementById('fullPageModal');
     let resultText = document.getElementById('resultText');
@@ -116,52 +167,4 @@ function showModal() {
         }
     });
 }
-
-function retractLine() {
-    isLineMoving = true;
-    lineDirection = -1;
-}
-
-function checkCollision() {
-    let lineRect = line.getBoundingClientRect();
-    if (lineDirection === 1) { // Check collision only when line is moving down
-        for (let fish of fishElements) {
-            let fishRect = fish.getBoundingClientRect();
-            if (lineRect.right > fishRect.left && lineRect.left < fishRect.right && lineRect.bottom > fishRect.top && lineRect.top < fishRect.bottom) {
-                // TODO: AJAX request to retrieve random fish in allowed time and season
-                // TODO: compare energy of fisherman with weight of fish attempted, run dice roll to determine success
-                caughtElement = fish;
-                lineDirection = -1; // Stop extending and start retracting
-                break;
-            }
-        }
-
-        for (let rock of rockElements) {
-            let rockRect = rock.getBoundingClientRect();
-            if (lineRect.right > rockRect.left && lineRect.left < rockRect.right && lineRect.bottom > rockRect.top && lineRect.top < rockRect.bottom) {
-                caughtElement = rock;
-                lineDirection = -1; // Stop extending and start retracting
-                break;
-            }
-        }
-    }
-}
-
-function startLineMovement() {
-    if (!isLineMoving) {
-        isLineMoving = true;
-        isSwinging = false;
-        lineDirection = 1;
-    }
-}
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === ' ' && !isLineMoving) {
-        startLineMovement();
-    }
-});
-
-// TODO: increase swing when intoxicated
-setInterval(swingLine, 50);
-setInterval(castLine, 20);
  

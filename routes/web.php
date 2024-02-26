@@ -27,3 +27,5 @@ Route::get('/fish', function () {
 })->name('fishing');
 
 Route::get('/ajax/{route}', [AjaxController::class, 'handleRequest']);
+
+Route::get('/mirror', [MirrorController::class, 'index'])->name('mirror');

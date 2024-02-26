@@ -18,9 +18,29 @@ class AjaxController extends Controller
         switch ($route) {
             case 'start':
                 $elements = "
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"survey-surroundings\"}' style='left:750px; top: 260px position:absolute;'>Press S to Survey your surroundings</h1>
+                ";
+                $background = "./images/cabin-interior.webp";
+                break;
+            case 'survey-surroundings':
+                $elements = "
+                
+                ";
+                $background = "./images/world-overview.jpg";
+            case 'cabin-after-survey':
+                $elements = "
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"p\":\"use-mirror\"}' style='left:180px; bottom:160px; position:absolute;'>Press P to Prepare for the day</h1>
+                ";
+                $background = "/images/cabin-interior.webp";
+            case 'mirror-used':
+                $elements = "
                     <h1 class='animate-text amarante-regular' data-key-param='{\"l\":\"leave-cabin\"}' style='right:60px; position:absolute;'>Press L to Leave</h1>
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"appreciate-world\"}' style='left:750px; top: 260px position:absolute;'>Press A to Appreciate the world</h1>
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"e\":\"use-mirror\"}' style='left:180px; bottom:160px; position:absolute;'>Press E to Enter the bathroom</h1>
+                ";
+                $background = "./images/cabin-interior.webp";
+                break;
+            case 'mirror-used':
+                $elements = "
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"l\":\"leave-cabin\"}' style='right:60px; position:absolute;'>Press L to Leave</h1>
                 ";
                 $background = "./images/cabin-interior.webp";
                 break;
