@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\MirrorController; 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,17 +24,7 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/fish', function () {
-    return view('fishing');
-})->name('fishing');
-
 Route::get('/ajax/{route}', [AjaxController::class, 'handleRequest']);
-
-Route::get('/mirror', [MirrorController::class, 'index'])->name('mirror');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -40,4 +32,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/fish', function () {
+    return view('fishing');
+})->name('fishing');
+
+Route::get('/mirror', [MirrorController::class, 'index'])->name('mirror');
+
+Route::get('/survey', function () {
+    return view('survey');
+})->name('survey-area');
 require __DIR__.'/auth.php';

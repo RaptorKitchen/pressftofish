@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.account-background {
+    background: url('../../../public/images/survey.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #d4eadc;
+}
+
+.dashboard-logo {
+    max-height: 275px;
+    margin-top: 15px;
+}
+
+nav {height:100px}

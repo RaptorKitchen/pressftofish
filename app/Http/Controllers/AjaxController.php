@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AjaxController extends Controller
 {
@@ -17,9 +18,13 @@ class AjaxController extends Controller
 
         switch ($route) {
             case 'start':
-                $elements = "
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"survey-surroundings\"}' style='left:250px; top: -90px;'>Press S to Survey your surroundings</h1>
+                $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"c\":\"survey-surroundings\"}' style='left:250px; top: -90px;'>Press S to Survey your surroundings</h1>
                 ";
+                if (Auth::check()) {
+                    $elements = "
+                        <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"survey-surroundings\"}' style='left:250px; top: -90px;'>Press C to Continue</h1>
+                    ";
+                }
                 $background = "./images/cabin-interior.webp";
                 break;
             case 'survey-surroundings':
