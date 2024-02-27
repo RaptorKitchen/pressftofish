@@ -47,6 +47,24 @@ body {
     background-repeat: no-repeat;
 }
 
+.mirror-background {
+    background-image: url('/images/mirror.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+
+#mirrorCanvas {
+    margin: 0 auto;
+    width: 31.5%;
+    margin-left: 33.3%;
+    margin-top: 8.5%;
+    border-radius: 10px;
+    height: 472px;
+}
+
 #about-text-container {
     background: #fff;
     padding: 5%;

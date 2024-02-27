@@ -18,7 +18,7 @@ class AjaxController extends Controller
         switch ($route) {
             case 'start':
                 $elements = "
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"survey-surroundings\"}' style='left:750px; top: 260px position:absolute;'>Press S to Survey your surroundings</h1>
+                    <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"survey-surroundings\"}' style='left:250px; top: -90px;'>Press S to Survey your surroundings</h1>
                 ";
                 $background = "./images/cabin-interior.webp";
                 break;
