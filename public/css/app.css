@@ -221,10 +221,23 @@ body {
     }
 }
 
-
 .auth-logo {
     width:50%;
 }
 .register {
     margin: 0 auto;
+}
+
+#survey {
+    #inputField {
+        border-radius: 5px;
+    }
+}
+
+#responseContainer {
+    #message {
+        font-size: 26px;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: black;
+    }
 }
