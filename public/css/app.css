@@ -229,15 +229,41 @@ body {
 }
 
 #survey {
+    margin-top: -100px;
     #inputField {
         border-radius: 5px;
+        margin: 0 auto;
+        margin-bottom: 25px;
     }
 }
 
 #responseContainer {
+    height: 25px;
+    margin-bottom: 15px;
     #message {
         font-size: 26px;
         -webkit-text-stroke-width: 1px;
         -webkit-text-stroke-color: black;
     }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+.shake {
+    animation: shake 0.1s ease-in-out 10;
+}
+
+@keyframes sway-input {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-5px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(5px); }
+}
+
+.sway-input {
+    animation: sway 2s ease-in-out infinite;
 }

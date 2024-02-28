@@ -23,26 +23,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const isInsideResponseField = responseField.querySelector('#' + searchedTerm);
 
             if (isInsideResponseField) {
-                console.log('found');
                 message.style.opacity = '1';
                 message.innerText = isInsideResponseField.textContent;
                 setTimeout(() => {
-                    console.log('found timeout');
                     message.style.opacity = '0';
                     var elementToRemove = document.getElementById(input);
                     elementToRemove.parentNode.removeChild(elementToRemove);
-                    $('#message').empty();
+                    $('.remove-on-press').fadeOut();
                 }, 2000);
             } else {
-                console.log('not found');
-                $(inputField).css('border', '2px solid red !important');
+                console.log(searchedTerm + ' not found');
+                shakeInput();
+                message.innerText = "Hmm, I don't see " + searchedTerm + " today";
                 setTimeout(() => {
                     console.log('not found timeout');
                     $(inputField).css('border', 'none');
                 }, 2000);
             }
+            setTimeout(() => {
+                $('#message').empty();
+            }, 2000);
 
             inputField.value = '';
         }
     });
 });
+
+function shakeInput() {
+    inputField.classList.add('shake');
+    setTimeout(() => {
+        inputField.classList.remove('shake');
+    }, 2000);
+}
