@@ -5,17 +5,42 @@
 @endsection
 
 @section('body')
-    <div class="mirror-background">
-        <div class="content-container">
-            <video id="inputVideo" width="400" height="800" class="d-none">
-            </video>
-            <canvas id="mirrorCanvas">
-            </canvas>
+<div class="mirror-background">
+    <div class="content-container">
+        <h1 class="animate-text amarante-regular" style="top:200px; left:32%">Press A to Admire Your Reflection</h1>
+        <div class="video-container">
+            <video id="inputVideo" autoplay muted height="100%"></video>
+            <canvas id="overlay" height="100%"></canvas>
+            <canvas id="webgl" height="100%"></canvas>
         </div>
     </div>
+    <div id="controls">
+		<select name="deformation" id="deform">
+			<option value="unwell">Unwell</option>
+			<option value="inca">Inca</option>
+			<option value="cheery">Cheery</option>
+			<option value="dopey">Dopey</option>
+			<option value="longface">Longface</option>
+			<option value="lucky">Lucky</option>
+			<option value="overcute">Overcute</option>
+			<option value="aloof">Aloof</option>
+			<option value="evil">Evil</option>
+			<option value="artificial">Artificial</option>
+			<option value="none">None</option>
+		</select>
+	</div>
+</div>
+
 @endsection
 
 @section('scripts')
-    <script src="/js/clmtrackr.js"></script>
+    <script src="{{ asset('js/mirror/clmtrackr.js') }}"></script>
+    <script src="{{ asset('js/mirror/dat.gui.min.js') }}"></script>
+	<script src="{{ asset('js/mirror/utils.js') }}"></script>
+	<script src="{{ asset('js/mirror/webgl-utils.js') }}"></script>
+	<script src="{{ asset('js/mirror/model_pca_20_svm.js') }}"></script>
+	<script src="{{ asset('js/mirror/Stats.js') }}"></script>
+	<script src="{{ asset('js/mirror/face_deformer.js') }}"></script>
+	<script src="{{ asset('js/mirror/poisson_new.js') }}"></script>
     <script src="{{ asset('js/mirror.js') }}"></script>
 @endsection

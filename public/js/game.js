@@ -1,4 +1,3 @@
-console.log('loaded');
 $(document).keypress(function(event) {
     //access the pressed key using event.key
     var pressedKey = event.key;

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MirrorController; 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/feature', [FeatureController::class, 'show'])->name('survey-area');
+
+Route::post('/feature/store', [FeatureController::class, 'store'])->name('feature.store');
+
 Route::get('/fish', function () {
     return view('fishing');
 })->name('fishing');
@@ -45,4 +50,5 @@ Route::get('/mirror', [MirrorController::class, 'index'])->name('mirror');
 Route::get('/survey', function () {
     return view('survey');
 })->name('survey-area');
+
 require __DIR__.'/auth.php';
