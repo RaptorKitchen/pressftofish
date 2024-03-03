@@ -1,59 +1,66 @@
-$(document).keypress(function(event) {
-    //access the pressed key using event.key
-    var pressedKey = event.key;
-    console.log(pressedKey+" pressed");
+$(document).ready(function() {
+    $('#game-input').on('keydown', function(event) {
+        if (event.key === 'Enter') {
+            var inputValue = $(this).val().toLowerCase();
+            $(this).val(''); // Clear the input field
 
-    //get data-attr of every option on screen
-    var availableElements = document.querySelectorAll('[data-key-param]');
-
-    //iterate through the elements and find the matching key
-    availableElements.forEach(function(element) {
-        //parse the data-key-param attribute value as JSON
-        var keyParam = JSON.parse(element.getAttribute('data-key-param'));
-
-        //check if the pressed key matches the key in the attribute
-        if (keyParam[pressedKey]) {
-            //start transition
-            console.log(keyParam[pressedKey]+" attached");
-            //ajax request to retrieve new page and replace current
-            $.ajax({
-                url: '/ajax/' + keyParam[pressedKey],
-                method: 'GET',
-                success: function(response) {
-                    console.log(response);
-                    //replace the body content with the new content
-                    $('#game-container').fadeOut(2000, function() {
-                        $('#game-container').html(response.elements).fadeIn();
-                    });
-                    bodyTransition(response.background);
-                    if (response.autoTransitionDestination) {
-                        setTimeout(() => {
-                            $.ajax({
-                                url: '/ajax/' + response.autoTransitionDestination,
-                                method: 'GET',
-                                success:function(response) {
-                                    $('#game-container').fadeOut(2000, function() {
-                                        $('#game-container').html(response.elements).fadeIn();
-                                    });
-                                    bodyTransition(response.background);
-                                }
-                            })
-                        }, 4000);
-                    }
-                    if (response.redirectTo) {
-                        setTimeout(() => {
-                            console.log(response.redirectTo);
-                            window.location=response.redirectTo;
-                        }, 4000);
-                    }
-                },
-                error: function(error) {
-                    console.error('Error fetching content:', error);
-                }
-            });
+            // Handle the input value (e.g., check for commands or dialogue options)
+            handleInput(inputValue);
         }
     });
 });
+
+function handleInput(inputValue) {
+    // Example: Check if the input matches a command
+    if (inputValue === 'start') {
+        ajaxRefreshPageContent(inputValue)
+    } else if (inputValue === 'mirror') {
+        ajaxRefreshPageContent(inputValue)
+    }
+    // Add more conditions as needed
+}
+
+function ajaxRefreshPageContent(inputValue) {
+    $.ajax({
+        url: '/ajax/' + inputValue,
+        method: 'GET',
+        success: function(response) {
+            console.log(response);
+            //replace the body content with the new content
+            $('#game-container').fadeOut(2000, function() {
+                $('#game-container').html(response.elements).fadeIn();
+                // render dialogue when present
+                renderResponseDialogue(response);
+            });
+            bodyTransition(response.background);
+            if (response.autoTransitionDestination) {
+                setTimeout(() => {
+                    $.ajax({
+                        url: '/ajax/' + response.autoTransitionDestination,
+                        method: 'GET',
+                        success:function(response) {
+                            $('#game-container').fadeOut(2000, function() {
+                                $('#game-container').html(response.elements).fadeIn();
+                                // render dialogue when present
+                                renderResponseDialogue(response);
+                            });
+                            bodyTransition(response.background);
+                        }
+                    })
+                }, 4000);
+            }
+            if (response.redirectTo) {
+                setTimeout(() => {
+                    console.log(response.redirectTo);
+                    window.location=response.redirectTo;
+                }, 4000);
+            }
+        },
+        error: function(error) {
+            console.error('Error fetching content:', error);
+        }
+    });
+}
 
 //get all elements with class "animate-text"
 var animateElements = document.querySelectorAll('.animate-text');
@@ -67,4 +74,12 @@ function bodyTransition(background) {
     $('#background-container').fadeOut(2000, function() {
         $('#background-container').css("background-image", "url("+background+")").fadeIn("slow").fadeIn(2000);
     });
+}
+
+function renderResponseDialogue(response) {
+    if (response.dialogue) {
+        console.log(response.dialogue);
+        var dialogueHtml = '<x-dialogue :text="' + response.dialogue.text + '" :options="' + JSON.stringify(response.dialogue.options) + '"></x-dialogue>';
+        $('#game-container').append(dialogueHtml);
+    }
 }

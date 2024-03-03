@@ -29,6 +29,14 @@ function enablestart() {
             if (event.which === 97) {
                 startVideo();
                 positionWebGLCanvas();
+                var deformSelect = document.getElementById('deform');
+                var options = deformSelect.options;
+                var randomIndex = Math.floor(Math.random() * options.length);
+                deformSelect.selectedIndex = randomIndex;
+
+                // Trigger the change event if you have a listener for it
+                var event = new Event('change');
+                deformSelect.dispatchEvent(event);
             }
         });
 	}
@@ -115,7 +123,6 @@ ctrack.init(pModel);
 var trackingStarted = false;
 
 function startVideo() {
-    console.log('filter started');
 	// start video
 	vid.play();
 	// start tracking
@@ -131,7 +138,6 @@ function startVideo() {
 }
 
 var fd = new faceDeformer();
-console.log(fd);
 var mouth_vertices = [
 	[44,45,61,44],
 	[45,46,61,45],

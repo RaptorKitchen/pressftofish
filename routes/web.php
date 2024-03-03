@@ -25,6 +25,10 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/about-me', function () {
+    return view('about-me');
+})->name('about_me');
+
 Route::get('/ajax/{route}', [AjaxController::class, 'handleRequest']);
 
 Route::middleware('auth')->group(function () {
@@ -46,6 +50,8 @@ Route::get('/fish', function () {
 })->name('fishing');
 
 Route::get('/mirror', [MirrorController::class, 'index'])->name('mirror');
+
+Route::post('/save-profile-image', [UserController::class, 'saveProfileImage'])->name('saveProfileImage');
 
 Route::get('/survey', function () {
     return view('survey');

@@ -15,10 +15,20 @@ class AjaxController extends Controller
         $autoTransitionLength = 0;
         $autoTransitionDestination = "";
         $redirectTo = "";
+        $dialogue = null;
 
         switch ($route) {
             case 'start':
-                $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"s\":\"survey-surroundings\"}' style='left:250px; top: -90px;'>Press S to Survey your surroundings</h1>
+                $dialogue = [
+                    'text' => "<span class='speaker'>???</span> The cabin looks to be in great shape. Nothing a little dusting won't fix.<br />I better get ready for the day.",
+                    'options' => [
+                        ['text' => 'Press P to prepare for the day', 'action' => 'mirror'],
+                        ['text' => 'Quit Game', 'action' => 'quitGame'],
+                    ],
+                ];
+                $elements = "
+                <h1 class='animate-text amarante-regular' data-key-param='{\"p\":\"mirror\"}' style='left:250px; top: -90px;'>Press P to Survey your surroundings</h1>
+                <x-dialogue :text=\"'" . $dialogue['text'] . "'\" :options=\"" . json_encode($dialogue['options']) . "\"></x-dialogue>
                 ";
                 /*
                 if (Auth::check()) {
@@ -86,7 +96,8 @@ class AjaxController extends Controller
             'background' => $background,
             'autoTransition' => $autoTransitionLength,
             'autoTransitionDestination' => $autoTransitionDestination,
-            'redirectTo' => $redirectTo
+            'redirectTo' => $redirectTo,
+            'dialogue' => $dialogue,
         ]);
     }
 

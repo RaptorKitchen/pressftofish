@@ -20,6 +20,64 @@ body {
     transition: opacity 0.5s ease-in-out;  
 }
 
+.footer {
+    background: #333;
+    color: #fefefe;
+    p, a {
+        color: #fefefe;
+    }
+}
+
+#game-container {
+    position: relative;
+    height: 100%;
+    width: 650px;
+}
+
+#dialogue-container {
+    position: absolute;
+    bottom: 50px; /* Adjust based on the height of your input field */
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 80%;
+    h1 {
+        font-size:32px;
+    }
+}
+
+.input-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+}
+
+#game-input {
+    width: 100%;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+.enter-icon {
+    position: absolute;
+    right: 60px;
+    top: -22px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    border-left: 1px solid #666;
+    padding-left: 5px;
+}
+
+#game-input {
+    position: absolute;
+    bottom: 10px; /* Adjust for spacing from the bottom */
+    left: 50%;
+    transform: translateX(-50%); /* Center the input horizontally */
+    width: 80%; /* Adjust based on your design */
+}
+
 .fishing-background {
     background: #1f130c;
     overflow: hidden;
@@ -53,7 +111,7 @@ body {
 }
 
 .mirror-background {
-    background-image: url('/images/mirror.jpg');
+    background-image: url('/images/plain-wall.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -70,7 +128,7 @@ body {
     height: 472px;
 }
 
-#about-text-container {
+.about-text-container {
     background: #fff;
     padding: 5%;
     border-radius: 10px;
@@ -283,3 +341,13 @@ body {
     height: 100%;
 }
 
+@media (min-width: 576px) {
+    .card-group.card-group-scroll {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+}
+
+.card-group.card-group-scroll > .card {
+    flex-basis: 35%;
+}
