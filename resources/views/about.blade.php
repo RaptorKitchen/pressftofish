@@ -38,8 +38,8 @@
                                 </div>
                             </div>
                             <p class="mt-5">This is a Laravel project made using a combination of HTML, CSS, Javascript, jQuery, PHP, and additional technologies.</p>
-                            <p class="mt-5">Please feel free to share your thoughts with Andrew here: <a href="https://twitter.com/@raptorkitchen" target="_blank">@raptorkitchen</a></p>
-                            <p class="mt-5">For more about Andrew, <a href="{{route('about_me')}}">click here</a>.</p>
+                            <p class="mt-5">Please feel free to share your thoughts here: <a href="https://twitter.com/@raptorkitchen" target="_blank">@raptorkitchen</a></p>
+                            <p class="mt-5">To learn more about Andrew, <a href="{{route('about_me')}}">click here</a>.</p>
                         </div>
                     </div>
                 </div>

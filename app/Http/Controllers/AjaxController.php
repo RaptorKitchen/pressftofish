@@ -16,6 +16,9 @@ class AjaxController extends Controller
         $autoTransitionDestination = "";
         $redirectTo = "";
         $dialogue = null;
+        $isLeftShard = false;
+        $isCenterShard = false;
+        $isRightShard = false;
 
         switch ($route) {
             case 'start':
@@ -30,6 +33,7 @@ class AjaxController extends Controller
                 <h1 class='animate-text amarante-regular' data-key-param='{\"p\":\"mirror\"}' style='left:250px; top: -90px;'>Press P to Survey your surroundings</h1>
                 <x-dialogue :text=\"'" . $dialogue['text'] . "'\" :options=\"" . json_encode($dialogue['options']) . "\"></x-dialogue>
                 ";
+                $isCenterShard = true;
                 /*
                 if (Auth::check()) {
                     $elements = "
@@ -98,6 +102,9 @@ class AjaxController extends Controller
             'autoTransitionDestination' => $autoTransitionDestination,
             'redirectTo' => $redirectTo,
             'dialogue' => $dialogue,
+            'isLeftShard' => $isLeftShard,
+            'isCenterShard' => $isCenterShard,
+            'isRightShard' => $isRightShard
         ]);
     }
 

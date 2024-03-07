@@ -1,3 +1,5 @@
+var inputField = document.getElementById('game-input');
+
 $(document).ready(function() {
     $('#game-input').on('keydown', function(event) {
         if (event.key === 'Enter') {
@@ -10,14 +12,17 @@ $(document).ready(function() {
     });
 });
 
+  
 function handleInput(inputValue) {
     // Example: Check if the input matches a command
     if (inputValue === 'start') {
         ajaxRefreshPageContent(inputValue)
     } else if (inputValue === 'mirror') {
         ajaxRefreshPageContent(inputValue)
+    } else {
+        //invalid command
+        shakeInput();
     }
-    // Add more conditions as needed
 }
 
 function ajaxRefreshPageContent(inputValue) {
@@ -25,7 +30,20 @@ function ajaxRefreshPageContent(inputValue) {
         url: '/ajax/' + inputValue,
         method: 'GET',
         success: function(response) {
-            console.log(response);
+            var keywords = {
+                'shard-left': response.isLeftShard,
+                'shard-center': response.isCenterShard,
+                'shard-right': response.isRightShard
+            };
+
+            Object.keys(keywords).forEach(function(key) {
+                var shard = document.querySelector('.' + key);
+                if (keywords[key]) {
+                    shard.classList.add('visible');
+                } else {
+                    shard.classList.remove('visible');
+                }
+            });
             //replace the body content with the new content
             $('#game-container').fadeOut(2000, function() {
                 $('#game-container').html(response.elements).fadeIn();
@@ -82,4 +100,11 @@ function renderResponseDialogue(response) {
         var dialogueHtml = '<x-dialogue :text="' + response.dialogue.text + '" :options="' + JSON.stringify(response.dialogue.options) + '"></x-dialogue>';
         $('#game-container').append(dialogueHtml);
     }
+}
+
+function shakeInput() {
+    $(inputField).parent().addClass('shake');
+    setTimeout(() => {
+        $(inputField).parent().removeClass('shake');
+    }, 1000);
 }

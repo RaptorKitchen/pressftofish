@@ -53,29 +53,29 @@
                             <!--three favorite sports, movies, books, tv shows-->
                             <div class="card-group card-group-scroll">
                                 <div class="card">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill" />
+                                    <img src="images/emily-and-i-chichen-itza.jpg" class="card-img-top" alt="Hollywood Sign on The Hill"  />
                                     <div class="card-body">
                                         <h5 class="card-title">My Family</h5>
                                         <p class="card-text">
-                                            I've been happily married for almost ten years to my wife, Emily Elmer. Our daughter Storm has just been accepted into law school, following in her mother's footsteps.
+                                            I've been happily married for almost ten years to my wife, Emily. Our daughter Storm has just been accepted into law school, following in her mother's footsteps.
                                         </p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Last updated March 1st, 2024</small>
+                                        <small class="text-muted">Emily and I at Chichen Itza, 2023</small>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp" class="card-img-top" alt="Palm Springs Road" />
+                                    <img src="images/vsc-code.jpg" class="card-img-top" alt="Palm Springs Road" />
                                     <div class="card-body">
                                         <h5 class="card-title">Coding</h5>
                                         <p class="card-text">I'm lucky enough to earn money doing something I love. If you have any interest in coding, whatsoever, I can't recommend the career enough. I've always loved solved puzzles. For most of my adult life, I've done it professionally.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Last updated March 1st, 2024</small>
+                                        <small class="text-muted">Early Press F to Fish Code, February 2024</small>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp" class="card-img-top" alt="Los Angeles Skyscrapers" />
+                                    <img src="images/keyclub.jpg" class="card-img-top" alt="Los Angeles Skyscrapers" />
                                     <div class="card-body">
                                         <h5 class="card-title">Music</h5>
                                         <p class="card-text">
@@ -83,11 +83,11 @@
                                         </p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Last updated March 1st, 2024</small>
+                                        <small class="text-muted">The crowd at one of my band's shows in 2008</small>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Hollywood Sign on The Hill" />
+                                    <img src="images/LEGENDS-THE GUNSLINGER-by-michael-whelan.jpg" class="card-img-top" alt="LEGENDS-THE GUNSLINGER art by Michael Whelan" />
                                     <div class="card-body">
                                         <h5 class="card-title">Stephen King</h5>
                                         <p class="card-text">
@@ -95,21 +95,21 @@
                                         </p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Last updated March 1st, 2024</small>
+                                        <small class="text-muted">&copy; 2015 Michael Whelan. <a href="https://www.michaelwhelan.com/shop/legends-gunslinger/" target="_blank">Legends: The Gunslinger</a></small>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/045.webp" class="card-img-top" alt="Palm Springs Road" />
+                                    <img src="images/red-wings.jpg" class="card-img-top" alt="Palm Springs Road" />
                                     <div class="card-body">
                                         <h5 class="card-title">Hockey</h5>
                                         <p class="card-text">I've recently grown very fond of hockey, thanks in part to the 2023-2024 success of the Detroit Red Wings. What an exciting time to watch this historic team.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Last updated March 1st, 2024</small>
+                                        <small class="text-muted">&copy; <a href="freep.com" target="_blank">Detroit Free Press</a></small>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/046.webp" class="card-img-top" alt="Los Angeles Skyscrapers" />
+                                    <img src="images/vecteezy_work-tools-on-wooden-background_4340204.jpg" class="card-img-top" alt="Home Improvement" />
                                     <div class="card-body">
                                         <h5 class="card-title">DIY Projects</h5>
                                         <p class="card-text">
@@ -117,7 +117,7 @@
                                         </p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Last updated March 1st, 2024</small>
+                                        <small class="text-muted"><a href="https://www.vecteezy.com/free-photos/home-improvement">Home Improvement Stock photos by Vecteezy</a></small>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <p><a href="https://chess.com" target="_blank">Chess.com</a> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.</p>
+                                            <p>Chess is easily one of the greatest games ever created, and it's hard to argue that there's ever been a better time to play it. <a href="https://chess.com" target="_blank">Chess.com</a> provides an intuitive platform for playing and learning the game of chess. I'm too afraid to review just how much chess I've played in the last two or three years. </p>
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@
                                     </h2>
                                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <p><a href="https://orteil.dashnet.org/cookieclicker/" target="_blank">Cookie Clicker</a></p>
+                                            <p>Cookie Clicker is an incredibly impressive display of the power of javascript. Like chess.com, I'm also a little afraid to see just how much time I've spent in <a href="https://orteil.dashnet.org/cookieclicker/" target="_blank">Cookie Clicker</a>.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -157,12 +157,22 @@
                                     </h2>
                                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <p><a href="https://codecademy.com" target="_blank">CodeCademy</a></p>
+                                            <p>Every time I speak to someone who mentions some interest in learning how to code, I recommend starting with <a href="https://codecademy.com" target="_blank">CodeCademy</a>. It's the kind of site I wish existed when I was first learning html, css, and javascript. Utilizing the free resources there will easily teach you 80% of what you need ot know to build a web site or application.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--two photos or video-->
+                            <p class="mt-5 mb-5">To go back to fishing, type "fish" here</p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12 mt-5">
+                                        <div class="input-container">
+                                            <input type="text" id="game-input" placeholder='Type "fish" to resume fishing...'>
+                                            <span class="enter-icon">&#8629;</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
