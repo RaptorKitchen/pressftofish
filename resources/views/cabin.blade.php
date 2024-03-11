@@ -5,19 +5,14 @@
 @endsection
 
 @section('body')
-    <div id="background-container">
+    <div id="cabin-container">
         <div class="container d-flex align-items-center justify-content-center" style="min-height: 89vh;">
             <div class="text-center">
                 <div id="game-container">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="./images/pftf-logo.png" class="text-center img-responsive" width="350" style="margin-top: -35%; margin-bottom: 150px" id="animatedLogoPrimary"/>
-                        </div>
-                    </div>
                     <div class="row mt-5">
                         <div class="col-12">
                             <div class="input-container">
-                                <input type="text" id="game-input" placeholder="Type start to begin...">
+                                <input type="text" id="game-input" placeholder="Type mirror to center yourself...">
                                 <span class="enter-icon">&#8629;</span>
                             </div>
                         </div>

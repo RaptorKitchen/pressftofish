@@ -11,7 +11,7 @@
                 <div class="col-12 text-center">
                     <img src="./images/pftf-logo.png" class="m-2 text-center img-responsive" width="350"/>
                 </div>
-                <div class="about-text-container">
+                <div class="about-text-container mb-5">
                     <div class="row">
                         <div class="col-12">
                             <p>My name is Andrew Lerma.</p>

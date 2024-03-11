@@ -19,12 +19,25 @@ body {
     transition: opacity 0.5s ease-in-out;  
 }
 
+@keyframes sway {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+#animatedLogoPrimary {
+    animation: sway 3s ease-in-out infinite;
+}
+
 .shard-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 90vh; /* Adjust the height as needed */
+    height: 75vh; /* Adjust the height as needed */
     overflow: hidden;
     z-index: 10;
 }
@@ -56,7 +69,7 @@ body {
 .shard-left {
     left: 0;
     clip-path: polygon(50% 100%, 0 0, 100% 0);
-    transform: rotate(-45deg);
+    transform: rotate(-50deg);
     height: 800px;
 }
 
@@ -68,11 +81,11 @@ body {
 .shard-right {
     right: 0;
     clip-path: polygon(50% 100%, 0 0, 100% 0);
-    transform: rotate(45deg);
+    transform: rotate(50deg);
     height: 800px;
 }
 
-.footer {
+footer {
     background: #333;
     color: #fefefe;
     p, a {
@@ -104,7 +117,7 @@ body {
 .enter-icon {
     position: absolute;
     right: 11%;
-    top: -22px;
+    top: -85px;
     transform: translateY(-50%);
     font-size: 20px;
     cursor: pointer;
@@ -115,7 +128,7 @@ body {
 
 #game-input {
     position: relative; /* Changed to relative */
-    bottom: 10px;
+    bottom: 100px;
     left: 0; /* Changed to 0 */
     transform: translateX(0); /* Changed to 0 */
     width: 80%;
@@ -141,6 +154,13 @@ body {
 
 #background-container {
     background-image: url('/images/pftf-cabin.gif');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#cabin-container {
+    background-image: url('/images/cabin-interior.webp');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -178,7 +198,7 @@ body {
     color: #333;
 }
 
-.gray-link {
+.gray-text {
     color: #333;
 }
 
@@ -234,17 +254,24 @@ body {
 
 .fish, .rock {
     position: absolute;
-    width: 30px;
-    height: 30px;
     border-radius: 50%;
 }
 
 .fish {
-    background-color: #ffd700;
+    background-color: #4e2525;
+    width: 30px;
+    height: 30px;
 }
 
 .rock {
     background-color: #808080;
+    width: 30px;
+    height: 30px;
+}
+
+.big-rock, .big-fish {
+    width: 60px;
+    height: 60px;
 }
 
 .diamondBackground {

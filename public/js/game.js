@@ -1,26 +1,25 @@
 var inputField = document.getElementById('game-input');
 
 $(document).ready(function() {
-    $('#game-input').on('keydown', function(event) {
+    $(inputField).focus();
+    $(inputField).on('keydown', function(event) {
         if (event.key === 'Enter') {
             var inputValue = $(this).val().toLowerCase();
             $(this).val(''); // Clear the input field
-
             // Handle the input value (e.g., check for commands or dialogue options)
             handleInput(inputValue);
         }
     });
 });
-
   
 function handleInput(inputValue) {
-    // Example: Check if the input matches a command
-    if (inputValue === 'start') {
-        ajaxRefreshPageContent(inputValue)
-    } else if (inputValue === 'mirror') {
-        ajaxRefreshPageContent(inputValue)
+    // Array of available routes
+    const availableRoutes = ['start', 'mirror', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal'];
+
+    if (availableRoutes.includes(inputValue)) {
+        ajaxRefreshPageContent(inputValue);
     } else {
-        //invalid command
+        // Invalid command
         shakeInput();
     }
 }
@@ -30,6 +29,7 @@ function ajaxRefreshPageContent(inputValue) {
         url: '/ajax/' + inputValue,
         method: 'GET',
         success: function(response) {
+            //before anything else happens, make sure user has cleared mirror before continuing to other routes
             var keywords = {
                 'shard-left': response.isLeftShard,
                 'shard-center': response.isCenterShard,
@@ -44,12 +44,14 @@ function ajaxRefreshPageContent(inputValue) {
                     shard.classList.remove('visible');
                 }
             });
+
             //replace the body content with the new content
             $('#game-container').fadeOut(2000, function() {
                 $('#game-container').html(response.elements).fadeIn();
                 // render dialogue when present
                 renderResponseDialogue(response);
             });
+
             bodyTransition(response.background);
             if (response.autoTransitionDestination) {
                 setTimeout(() => {

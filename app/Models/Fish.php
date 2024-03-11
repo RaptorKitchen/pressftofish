@@ -26,11 +26,8 @@ class Fish extends Model
         'latin_name',
         'chance_range_start',
         'chance_range_end',
-        'active_time_of_day_start',
-        'active_time_of_day_end',
-        'population',
-        'season',
         'description',
-        'image_url'
+        'image_url',
+        'further_reading'
     ];
 }

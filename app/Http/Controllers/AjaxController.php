@@ -22,7 +22,15 @@ class AjaxController extends Controller
 
         switch ($route) {
             case 'start':
-                $dialogue = [
+                if (Auth::check()) {
+                    $background = "./images/cabin-interior.webp";
+                    //continue to cabin or last known location
+                    //$redirectTo = route($user->getLastPage());
+                } else {
+                    $background = "./images/survey.png";
+                    $redirectTo = route('register');
+                }
+/*                $dialogue = [
                     'text' => "<span class='speaker'>???</span> The cabin looks to be in great shape. Nothing a little dusting won't fix.<br />I better get ready for the day.",
                     'options' => [
                         ['text' => 'Press P to prepare for the day', 'action' => 'mirror'],
@@ -33,6 +41,7 @@ class AjaxController extends Controller
                 <h1 class='animate-text amarante-regular' data-key-param='{\"p\":\"mirror\"}' style='left:250px; top: -90px;'>Press P to Survey your surroundings</h1>
                 <x-dialogue :text=\"'" . $dialogue['text'] . "'\" :options=\"" . json_encode($dialogue['options']) . "\"></x-dialogue>
                 ";
+*/
                 $isCenterShard = true;
                 /*
                 if (Auth::check()) {
@@ -41,7 +50,7 @@ class AjaxController extends Controller
                     ";
                 }
                 */
-                $background = "./images/cabin-interior.webp";
+                
                 break;
             case 'survey-surroundings':
                 $elements = "
@@ -76,10 +85,12 @@ class AjaxController extends Controller
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
                 break;
-            case 'use-mirror':
+            case 'mirror':
                 //TODO: survey - what do you see in self, what troubles you, what are your goals
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
+                $isLeftShard = true;
+                $redirectTo = route('mirror');
                 break;                
             case 'interior-fish':
                 $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"f\":\"attempt-fish\"}'>Press F to Fish</h1>";

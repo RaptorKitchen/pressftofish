@@ -10,11 +10,12 @@ let swingDirection = 1; // 1 for right, -1 for left
 let lineLength = 25; // this val changes when cast
 let initialLineLength = 25; //this is the default length
 let lineMaxLength = 500;
-let lineSpeed = 2;
+let lineSpeed = 5;
 let swingSpeed = 2;
 let isLineMoving = false;
 let isSwinging = true;
 let caughtElement = null;
+let retractSpeed = 5; // Default retract speed
 
 function swingLine() {
     if (!isSwinging) return;
@@ -31,6 +32,41 @@ function swingLine() {
     lure.style.transform = `translate(-50%, ${lineLength - 25}px) rotate(${lineAngle * 0.5}deg)`;
 }
 
+function retractLine() {
+    isLineMoving = true;
+    lineDirection = -1;
+}
+
+function checkCollision() {
+    let lineRect = line.getBoundingClientRect();
+    if (lineDirection === 1) { // Check collision only when line is moving down
+        for (let fish of fishElements) {
+            let fishRect = fish.getBoundingClientRect();
+            if (lineRect.right > fishRect.left && lineRect.left < fishRect.right && lineRect.bottom > fishRect.top && lineRect.top < fishRect.bottom) {
+                caughtElement = fish;
+                retractSpeed = 2; // Middle speed for fish
+                lineDirection = -1; // Start retracting
+                break;
+            }
+        }
+
+        for (let rock of rockElements) {
+            let rockRect = rock.getBoundingClientRect();
+            if (lineRect.right > rockRect.left && lineRect.left < rockRect.right && lineRect.bottom > rockRect.top && lineRect.top < rockRect.bottom) {
+                caughtElement = rock;
+                retractSpeed = 1; // Slowest speed for rocks
+                lineDirection = -1; // Start retracting
+                break;
+            }
+        }
+    }
+
+    // Reset retractSpeed to fastest if nothing was caught
+    if (caughtElement === null) {
+        retractSpeed = 5;
+    }
+}
+
 function castLine() {
     if (!isLineMoving) return;
 
@@ -38,16 +74,16 @@ function castLine() {
         if (lineLength < lineMaxLength) {
             lineLength += lineSpeed;
         } else {
-            lineDirection = -1;
+            retractLine();
         }
     } else {
         if (lineLength > initialLineLength) {
-            lineLength -= lineSpeed;
+            lineLength -= retractSpeed;
         } else {
             lineDirection = 1;
             isLineMoving = false;
             isSwinging = true;
-            if (caughtElement && caughtElement.classList.contains('fish')) {
+            if (caughtElement) {
                 // Show modal for fish
                 showModal();
                 caughtElement.remove();
@@ -61,38 +97,13 @@ function castLine() {
     checkCollision(); // Ensure collision check is performed during extension
 
     // Update the position and rotation of the lure to match the line
-    let deltaX = lineLength * Math.sin(-lineAngle * Math.PI / 180); // Negate the angle for correct direction
-    let deltaY = lineLength * Math.cos(-lineAngle * Math.PI / 180); // Negate the angle for correct direction
+    let deltaX = lineLength * Math.sin(-lineAngle * Math.PI / 180); // Use the negative angle for correct horizontal direction
+    let deltaY = lineLength * Math.cos(lineAngle * Math.PI / 180) - line.offsetWidth / 2; // Subtract half the line's width to align with the end
     lure.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${lineAngle}deg)`;
-}
 
-function retractLine() {
-    isLineMoving = true;
-    lineDirection = -1;
-}
-
-function checkCollision() {
-    let lineRect = line.getBoundingClientRect();
-    if (lineDirection === 1) { // Check collision only when line is moving down
-        for (let fish of fishElements) {
-            let fishRect = fish.getBoundingClientRect();
-            if (lineRect.right > fishRect.left && lineRect.left < fishRect.right && lineRect.bottom > fishRect.top && lineRect.top < fishRect.bottom) {
-                // TODO: AJAX request to retrieve random fish in allowed time and season
-                // TODO: compare energy of fisherman with weight of fish attempted, run dice roll to determine success
-                caughtElement = fish;
-                lineDirection = -1; // Stop extending and start retracting
-                break;
-            }
-        }
-
-        for (let rock of rockElements) {
-            let rockRect = rock.getBoundingClientRect();
-            if (lineRect.right > rockRect.left && lineRect.left < rockRect.right && lineRect.bottom > rockRect.top && lineRect.top < rockRect.bottom) {
-                caughtElement = rock;
-                lineDirection = -1; // Stop extending and start retracting
-                break;
-            }
-        }
+    // Update the position of the caught element to follow the line only after it starts retracting
+    if (caughtElement && lineDirection === -1) {
+        caughtElement.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${lineAngle}deg)`;
     }
 }
 
@@ -101,6 +112,7 @@ function startLineMovement() {
         isLineMoving = true;
         isSwinging = false;
         lineDirection = 1;
+        caughtElement = null; // Reset caughtElement when starting a new cast
     }
 }
 
@@ -110,7 +122,6 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// TODO: increase swing when intoxicated
 setInterval(swingLine, 50);
 setInterval(castLine, 20);
 

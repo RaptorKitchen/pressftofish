@@ -19,6 +19,10 @@
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
         </div>
         @yield('body')
+        <footer class="text-center">
+            <p><a href="{{ route('about') }}" target="_blank">About Project</a> | <a href="{{ route('about_me') }}" target="_blank">About Me</a></p>
+            <p>&copy; {{ date('Y') }} Andrew Lerma</p>
+        </footer>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         @yield('scripts')

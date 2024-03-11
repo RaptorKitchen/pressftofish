@@ -29,11 +29,15 @@
                                 <div id="fishArea">
                                     <div id="fisher" class="d-none"></div>
                                     <div id="line"></div>
+                                    
                                     <img src="/images/lure.png" id="lure" class="lure">
                                     <div class="fish" style="top: 300px; left: 200px;"></div>
                                     <div class="fish" style="top: 250px; left: 400px;"></div>
-                                    <div class="fish" style="top: 450px; left: 600px;"></div>
+                                    <div class="fish big-fish" style="top: 450px; left: 600px;"></div>
+                                    <div class="fish" style="top: 600px; right: 100px;"></div>
                                     <div class="rock" style="top: 200px; left: 100px;"></div>
+                                    <div class="rock big-rock" style="top: 200px; left: 100px;"></div>
+                                    <div class="rock" style="top: 300px; left: 500px;"></div>
                                 </div>
                             </center>
                         </div>
