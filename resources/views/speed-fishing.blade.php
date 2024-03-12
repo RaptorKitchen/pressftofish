@@ -26,21 +26,18 @@
                     <div class="row">
                         <div class="col-12">
                             <center>
-                                <div id="fishArea">
-                                    <div id="fisher" class="d-none"></div>
-                                    <div id="line">
-                                        <div id="hook1" class="fishing-hook">🪝</div>
-                                        <div id="hook2" class="fishing-hook">🪝</div>
+                                <div id="speedGameContainer">
+                                    <div id="scoreDisplay">Score: 0</div>
+                                    <div class="speed-lane" id="speedLeftLane">
+                                        <div id="player" class="fisherman left">🎣</div>
                                     </div>
-                                    
-                                    <img src="/images/lure.png" id="lure" class="lure d-none">
-                                    <div class="fish" style="top: 300px; left: 200px;"></div>
-                                    <div class="fish" style="top: 250px; left: 400px;"></div>
-                                    <div class="fish big-fish" style="top: 450px; left: 600px;"></div>
-                                    <div class="fish" style="top: 500px; right: 100px;"></div>
-                                    <div class="rock" style="top: 200px; left: 100px;"></div>
-                                    <div class="rock big-rock" style="top: 200px; left: 100px;"></div>
-                                    <div class="rock" style="top: 300px; left: 500px;"></div>
+                                    <div class="speed-lane" id="speedMiddleLane">
+                                        <div id="player" class="fisherman middle">🎣</div>
+                                    </div>
+                                    <div class="speed-lane" id="speedRightLane">
+                                        <div id="player" class="fisherman right">🎣</div>
+                                    </div>
+                                    <input type="text" id="speedFishGameInput" placeholder="Type to fish...">
                                 </div>
                             </center>
                         </div>
@@ -56,5 +53,5 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/fish.js') }}"></script>
+    <script src="{{ asset('js/speed-fishing.js') }}"></script>
 @endsection

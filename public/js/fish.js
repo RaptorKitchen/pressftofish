@@ -7,9 +7,9 @@ let score = 0;
 let lineAngle = 0;
 let lineDirection = 1; // 1 for down, -1 for up
 let swingDirection = 1; // 1 for right, -1 for left
-let lineLength = 25; // this val changes when cast
-let initialLineLength = 25; //this is the default length
-let lineMaxLength = 500;
+let lineLength = 50; // this val changes when cast
+let initialLineLength = 50; //this is the default length
+let lineMaxLength = 650;
 let lineSpeed = 5;
 let swingSpeed = 2;
 let isLineMoving = false;
@@ -27,9 +27,10 @@ function swingLine() {
     }
 
     line.style.transform = `translateX(-50%) rotate(${lineAngle}deg)`;
-
-    // Update the position and rotation of the lure
-    lure.style.transform = `translate(-50%, ${lineLength - 25}px) rotate(${lineAngle * 0.5}deg)`;
+    /* make hooks sway (commented out because they sway too much)
+    document.getElementById('hook1').style.transform = `translateX(-25%) rotate(${lineAngle}deg)`; // Rotate hook1
+    document.getElementById('hook2').style.transform = `translateX(-25%) rotate(${lineAngle}deg)`; // Rotate hook2
+    */
 }
 
 function retractLine() {
@@ -46,6 +47,7 @@ function checkCollision() {
                 caughtElement = fish;
                 retractSpeed = 2; // Middle speed for fish
                 lineDirection = -1; // Start retracting
+                setPositionAtLineEnd(fish); // Set position of caught fish
                 break;
             }
         }
@@ -56,6 +58,7 @@ function checkCollision() {
                 caughtElement = rock;
                 retractSpeed = 1; // Slowest speed for rocks
                 lineDirection = -1; // Start retracting
+                setPositionAtLineEnd(rock); // Set position of caught rock
                 break;
             }
         }
@@ -74,18 +77,24 @@ function castLine() {
         if (lineLength < lineMaxLength) {
             lineLength += lineSpeed;
         } else {
-            retractLine();
+            retractLine(-5);
         }
     } else {
         if (lineLength > initialLineLength) {
-            lineLength -= retractSpeed;
+            lineLength -= lineSpeed;
+            if (caughtElement) {
+                // Calculate the position based on the line's angle and length
+                let deltaX = lineLength * Math.sin(lineAngle * Math.PI / 180);
+                let deltaY = lineLength * Math.cos(lineAngle * Math.PI / 180);
+                caughtElement.style.left = (line.offsetLeft - deltaX) + 'px';
+                caughtElement.style.top = (line.offsetTop + deltaY) + 'px';
+            }
         } else {
             lineDirection = 1;
             isLineMoving = false;
             isSwinging = true;
             if (caughtElement) {
-                // Show modal for fish
-                showModal();
+                // Clear the caught element
                 caughtElement.remove();
                 caughtElement = null;
             }
@@ -95,16 +104,6 @@ function castLine() {
     line.style.height = lineLength + 'px';
     line.style.transform = `translateX(-50%) rotate(${lineAngle}deg)`;
     checkCollision(); // Ensure collision check is performed during extension
-
-    // Update the position and rotation of the lure to match the line
-    let deltaX = lineLength * Math.sin(-lineAngle * Math.PI / 180); // Use the negative angle for correct horizontal direction
-    let deltaY = lineLength * Math.cos(lineAngle * Math.PI / 180) - line.offsetWidth / 2; // Subtract half the line's width to align with the end
-    lure.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${lineAngle}deg)`;
-
-    // Update the position of the caught element to follow the line only after it starts retracting
-    if (caughtElement && lineDirection === -1) {
-        caughtElement.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${lineAngle}deg)`;
-    }
 }
 
 function startLineMovement() {

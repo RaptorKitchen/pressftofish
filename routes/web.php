@@ -61,4 +61,8 @@ Route::get('/survey', function () {
     return view('survey');
 })->name('survey-area');
 
+Route::get('/speed-fishing', function () {
+    return view('speed-fishing');
+})->name('speed-fishing');
+
 require __DIR__.'/auth.php';

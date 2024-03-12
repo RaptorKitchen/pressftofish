@@ -221,7 +221,7 @@ footer {
     opacity: 0;
 }
 
-#fishArea {
+#fishArea, #speedGameContainer {
     position: relative;
     width: 1000px;
     height: 600px;
@@ -243,13 +243,28 @@ footer {
 
 #line {
     position: absolute;
-    top: 50px;
+    top: 0px;
     left: 50%;
     transform: translateX(-50%);
     width: 2px;
     height: 50px;
     background-color: #000;
     transform-origin: top center;
+}
+
+.fishing-hook {
+    position: absolute;
+    bottom: -25px;
+    font-size: 22px;
+}
+
+#hook1 {
+    left: -925%;
+    transform: scaleX(-1);
+}
+
+#hook2 {
+    left: -515%;
 }
 
 .fish, .rock {
@@ -420,4 +435,69 @@ footer {
 
 .card-group.card-group-scroll > .card {
     flex-basis: 35%;
+}
+
+.speed-lane {
+    position: absolute;
+    width: 33.33%;
+    height: 100%;
+    bottom: 0;
+}
+
+#speedLeftLane {
+    left: 0;
+    border-right: 1px solid #000;
+}
+
+#speedMiddleLane {
+    left: 33.33%;
+    border-right: 1px solid #000;
+}
+
+#speedRightLane {
+    right: 0;
+}
+
+.speed-fisherman {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+}
+
+.speed-fish {
+    position: absolute;
+    padding: 5px;
+    background-color: #fff;
+    border: 2px solid green; /* Initial border color */
+    border-radius: 5px;
+    color: #333;
+    margin:20px;
+}
+
+#speedFishGameInput {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+
+.active-lane {
+    border: 2px solid #ff0;
+}
+
+.points-display {
+    position: absolute;
+    color: #fff;
+    background-color: #000;
+    padding: 5px;
+    border-radius: 5px;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
