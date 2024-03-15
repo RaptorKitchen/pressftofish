@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class AjaxController extends Controller
 {
@@ -23,24 +24,28 @@ class AjaxController extends Controller
         switch ($route) {
             case 'start':
                 if (Auth::check()) {
-                    $background = "./images/cabin-interior.webp";
+                    //$background = "./images/cabin-interior.webp";
                     //continue to cabin or last known location
                     //$redirectTo = route($user->getLastPage());
                 } else {
-                    $background = "./images/survey.png";
-                    $redirectTo = route('register');
+                    $background = './images/pftf-cabin.gif';
+                    $elements = view('auth.register')->render();
                 }
-/*                $dialogue = [
+/*
+                $dialogue = [
                     'text' => "<span class='speaker'>???</span> The cabin looks to be in great shape. Nothing a little dusting won't fix.<br />I better get ready for the day.",
                     'options' => [
                         ['text' => 'Press P to prepare for the day', 'action' => 'mirror'],
                         ['text' => 'Quit Game', 'action' => 'quitGame'],
                     ],
                 ];
-                $elements = "
-                <h1 class='animate-text amarante-regular' data-key-param='{\"p\":\"mirror\"}' style='left:250px; top: -90px;'>Press P to Survey your surroundings</h1>
-                <x-dialogue :text=\"'" . $dialogue['text'] . "'\" :options=\"" . json_encode($dialogue['options']) . "\"></x-dialogue>
-                ";
+
+                $elements = '
+                    <h1 class="animate-text amarante-regular" data-destination="leave-cabin-left" style="left:250px; top: -90px;">Type "fish" to fulfill your purpose</h1>
+                    <h1 class="animate-text amarante-regular" data-destination="leave-cabin-left" style="left:450px; top: -30px;">Type "survey" to get your bearings</h1>
+                    <h1 class="animate-text amarante-regular" data-destination="leave-cabin-left" style="left:450px; top: -30px;">Type "dust" to dust the room</h1>
+                
+                ';
 */
                 $isCenterShard = true;
                 /*
@@ -50,23 +55,46 @@ class AjaxController extends Controller
                     ";
                 }
                 */
-                
+                //$background = "/images/cabin-interior.webp";
                 break;
-            case 'survey-surroundings':
+            case 'survey':
                 $elements = "
                 
                 ";
                 $background = "./images/world-overview.jpg";
             case 'cabin-after-survey':
-                $elements = "
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"p\":\"use-mirror\"}' style='left:180px; bottom:160px; position:absolute;'>Press P to Prepare for the day</h1>
-                ";
+                $elements = '
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="input-container">
+                                <input type="text" id="game-input" placeholder="Type mirror to center yourself...">
+                                <span class="enter-icon">&#8629;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shard-container">
+                        <div class="shard-slice shard-left deg-minus-45"></div>
+                        <div class="shard-slice shard-center"></div>
+                        <div class="shard-slice shard-right deg-45"></div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div id="dialogue-container">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p id="leftChoiceLabel" class="choice-label">Type "tidy" to get rid of that awful smell</p>
+                                    </div>
+                                    <div class="col-4">
+                                    </div>
+                                    <div class="col-4">
+                                        <p id="rightChoiceLabel" class="choice-label">Type "fish" to find your purpose</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ';
                 $background = "/images/cabin-interior.webp";
-            case 'mirror-used':
-                $elements = "
-                    <h1 class='animate-text amarante-regular' data-key-param='{\"l\":\"leave-cabin\"}' style='right:60px; position:absolute;'>Press L to Leave</h1>
-                ";
-                $background = "./images/cabin-interior.webp";
                 break;
             case 'mirror-used':
                 $elements = "

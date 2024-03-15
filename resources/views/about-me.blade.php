@@ -163,16 +163,10 @@
                                 </div>
                             </div>
                             <p class="mt-5 mb-5">To go back to fishing, type "fish" here</p>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 mt-5">
-                                        <div class="input-container">
-                                            <input type="text" id="game-input" placeholder='Type "fish" to resume fishing...'>
-                                            <span class="enter-icon">&#8629;</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <form method="get" action="{{route('last_known')}}">
+                                <input type="text" id="game-input" name="return" placeholder='Type "fish" to resume fishing...'>
+                                <span class="enter-icon">&#8629;</span>
+                            </form>
                         </div>
                     </div>
                 </div>

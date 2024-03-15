@@ -4,6 +4,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MirrorController; 
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('start');
 
 Route::get('/about', function () {
     return view('about');
@@ -45,9 +46,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/feature', [FeatureController::class, 'show'])->name('survey-area');
+Route::get('/survey', [FeatureController::class, 'show'])->name('survey-area');
 
-Route::post('/feature/store', [FeatureController::class, 'store'])->name('feature.store');
+Route::post('/survey/store', [FeatureController::class, 'store'])->name('feature.store');
 
 Route::get('/fish', function () {
     return view('fishing');
@@ -57,12 +58,16 @@ Route::get('/mirror', [MirrorController::class, 'index'])->name('mirror');
 
 Route::post('/save-profile-image', [UserController::class, 'saveProfileImage'])->name('saveProfileImage');
 
-Route::get('/survey', function () {
-    return view('survey');
-})->name('survey-area');
-
 Route::get('/speed-fishing', function () {
     return view('speed-fishing');
 })->name('speed-fishing');
+
+Route::get('/last-known', function() {
+    if (Auth::check()) {
+        return redirect()->route($user->getLastKnown());
+    } else {
+        return redirect()->route('start');
+    }
+})->name('last_known');
 
 require __DIR__.'/auth.php';

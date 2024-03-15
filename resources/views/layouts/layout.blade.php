@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Fonts -->
         <!-- https://fonts.google.com/specimen/VT323/about VT323 by Peter Hull -->
@@ -16,8 +17,6 @@
         @yield('title')
     </head>
     <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
-        </div>
         @yield('body')
         <footer class="text-center">
             <p><a href="{{ route('about') }}" target="_blank">About Project</a> | <a href="{{ route('about_me') }}" target="_blank">About Me</a></p>

@@ -1,1 +1,1 @@
-<img src="images/pftf-logo.png" width="50%" alt="Press F to Fish Logo" class="mx-auto d-block dashboard-logo img-fluid"/>
+<img src="images/pftf-logo.png" width="50%" alt="Press F to Fish Logo" class="mx-auto d-block dashboard-logo img-fluid" id="animatedLogoPrimary"/>

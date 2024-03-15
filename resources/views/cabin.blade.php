@@ -18,19 +18,24 @@
                         </div>
                     </div>
                     <div class="shard-container">
-                        <div class="shard-slice shard-left deg-minus-45">
-                            <p></p>
-                        </div>
-                        <div class="shard-slice shard-center">
-                            <p></p>
-                        </div>
-                        <div class="shard-slice shard-right deg-45">
-                            <p></p>
-                        </div>
+                        <div class="shard-slice shard-left deg-minus-45"></div>
+                        <div class="shard-slice shard-center"></div>
+                        <div class="shard-slice shard-right deg-45"></div>
                     </div>
                     <div class="row mt-5">
                         <div class="col-12">
                             <div id="dialogue-container">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p id="leftChoiceLabel" class="choice-label">Type "tidy" to get rid of that awful smell</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p id="centerChoiceLabel" class="choice-label">Type "survey" to get your bearings</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p id="rightChoiceLabel" class="choice-label">Type "fish" to find your purpose</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
