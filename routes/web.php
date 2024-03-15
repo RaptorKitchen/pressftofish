@@ -4,6 +4,7 @@ use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MirrorController; 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -69,5 +70,9 @@ Route::get('/last-known', function() {
         return redirect()->route('start');
     }
 })->name('last_known');
+
+//questions 
+Route::get('/get-question', [QuestionController::class, 'getQuestion'])->name('get-question');
+Route::post('/submit-answer', [QuestionController::class, 'submitAnswer'])->name('submit-answer');
 
 require __DIR__.'/auth.php';
