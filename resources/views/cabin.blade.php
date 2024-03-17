@@ -27,13 +27,13 @@
                             <div id="dialogue-container">
                                 <div class="row">
                                     <div class="col-4">
-                                        <p id="leftChoiceLabel" class="choice-label">Type "tidy" to get rid of that awful smell</p>
+                                        <p id="leftChoiceLabel" class="choice-label floats">Type "mirror" to get see how you look</p>
                                     </div>
                                     <div class="col-4">
-                                        <p id="centerChoiceLabel" class="choice-label">Type "survey" to get your bearings</p>
+                                        <p id="centerChoiceLabel" class="choice-label floats">Type "survey" to get your bearings</p>
                                     </div>
                                     <div class="col-4">
-                                        <p id="rightChoiceLabel" class="choice-label">Type "fish" to find your purpose</p>
+                                        <p id="rightChoiceLabel" class="choice-label floats">Type "fish" to find your purpose</p>
                                     </div>
                                 </div>
                             </div>

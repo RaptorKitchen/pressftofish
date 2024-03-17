@@ -28,7 +28,7 @@ body {
     }
 }
 
-#animatedLogoPrimary {
+#animatedLogoPrimary, .floats {
     animation: sway 3s ease-in-out infinite;
 }
 
@@ -92,7 +92,9 @@ footer {
         color: #fefefe;
     }
 }
-
+form {
+    color:#333;
+}
 #dialogue-container {
     /*
     position: absolute;
@@ -169,7 +171,7 @@ footer {
 }
 
 #cabin-container {
-    background-image: url('/images/cabin-interior.webp');
+    background-image: url('/images/cabin-interior-clean-table.jpg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;

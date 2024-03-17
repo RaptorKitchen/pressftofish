@@ -15,8 +15,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="animate-text amarante-regular">Press A to Admire Your Reflection</h1>
-                    <h1 class="animate-text amarante-regular">Press C to Capture The Moment</h1>
+                    <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="input-container">
+                                <input type="text" id="game-input" placeholder="Type cabin return to the previous room...">
+                                <span class="enter-icon">&#8629;</span>
+                            </div>
+                        </div>
+                    </div>
                     <div id="controls" class="d-none">
                         <select name="deformation" id="deform">
                             <option value="unwell">Unwell</option>
@@ -50,6 +56,7 @@
 	<script src="{{ asset('js/mirror/face_deformer.js') }}"></script>
 	<script src="{{ asset('js/mirror/poisson_new.js') }}"></script>
     <script src="{{ asset('js/mirror.js') }}"></script>
+    <script src="{{ asset('js/game.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js"></script>
     <script>
         function captureAndSave() {

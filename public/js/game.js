@@ -21,8 +21,8 @@ $(document).ready(function() {
   
 function handleInput(inputValue) {
     // Array of available routes
-    const availableRoutes = ['start', 'mirror', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal'];
-    
+    const availableRoutes = ['start', 'mirror', 'cabin', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal'];
+
     if (availableRoutes.includes(inputValue)) {
         console.log(inputValue+' is a valid route');
         ajaxRefreshPageContent(inputValue);
@@ -40,7 +40,6 @@ function ajaxRefreshPageContent(inputValue) {
         method: 'GET',
         success: function(response) {
             console.log('page refresh successful');
-            //before anything else happens, make sure user has cleared mirror before continuing to other routes
             var keywords = {
                 'shard-left': response.isLeftShard,
                 'shard-center': response.isCenterShard,
@@ -49,10 +48,12 @@ function ajaxRefreshPageContent(inputValue) {
 
             Object.keys(keywords).forEach(function(key) {
                 var shard = document.querySelector('.' + key);
-                if (keywords[key]) {
-                    shard.classList.add('visible');
-                } else {
-                    shard.classList.remove('visible');
+                if (shard) {
+                    if (keywords[key]) {
+                        shard.classList.add('visible');
+                    } else {
+                        shard.classList.remove('visible');
+                    }
                 }
             });
 
@@ -64,7 +65,10 @@ function ajaxRefreshPageContent(inputValue) {
                 renderResponseDialogue(response);
             });
 
-            bodyTransition(response.background);
+            if (response.background) {
+                bodyTransition(response.background);
+            }
+
             if (response.autoTransitionDestination) {
                 console.log('attempting auto-transition');
                 setTimeout(() => {
@@ -121,3 +125,21 @@ function shakeInput() {
         $(inputField).parent().removeClass('shake');
     }, 1000);
 }
+
+$('#startForm').submit(function(event) {
+    event.preventDefault();
+
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function(response) {
+            console.log('Session started and user created');
+            ajaxRefreshPageContent('cabin');
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error('Error starting session:', error);
+        }
+    });
+});

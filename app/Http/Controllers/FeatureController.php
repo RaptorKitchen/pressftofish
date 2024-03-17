@@ -30,5 +30,24 @@ class FeatureController extends Controller
         //dd($userId, $features);
     
         return view('feature', compact('features'));
-    }    
+    }
+    
+    public function storeFeatureName(Request $request)
+    {
+        $featureName = $request->input('feature_name');
+        $featureId = $request->input('feature_id');
+    
+        // Store the feature name in the session
+        session()->put("features.$featureId", $featureName);
+    
+        return back()->with('success', 'Feature name saved successfully.');
+    }
+
+    public function showFeatures()
+    {
+        $features = session()->get('features', []);
+    
+        return view('feature', compact('features'));
+    }
+    //clear with session()->forget('features');
 }

@@ -13,13 +13,16 @@
                 </div>
             </div>
         </div>
-        <form action="{{ route('feature.store') }}" method="POST">
+        <form action="{{ route('feature.store') }}" method="POST" class="text-center">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-            <label for="feature_mountain">Mountain Name:</label>
+            <label for="feature_mountain">The Mountain:</label>
             <input type="text" id="feature_mountain" name="feature[mountain]" value="{{ $features['mountain'] ?? '' }}">
-
-            <label for="feature_cave">Cave Name:</label>
+            
+            <label for="feature_lake">The Lake:</label>
+            <input type="text" id="feature_lake" name="feature[lake]" value="{{ $features['lake'] ?? '' }}">
+            
+            <label for="feature_cave">The Cave:</label>
             <input type="text" id="feature_mountain" name="feature[mountain]" value="{{ $features['cave'] ?? '' }}">
 
             <button type="submit">Submit</button>

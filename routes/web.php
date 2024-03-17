@@ -5,6 +5,9 @@ use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\MirrorController; 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +24,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('start');
+
+Route::post('/', function (Request $request) {
+
+    if ($request->session()->exists('user_id')) {
+        // Session exists, redirect to the cabin
+        return redirect('/cabin');
+    } else {
+        // Create a new user or retrieve an existing one
+        $user = User::firstOrCreate([
+            'name' => 'Guest',
+            'email' => 'guest' . rand(1000, 9999) . '@pressftofish.io',
+            'password' => bcrypt('secret')
+        ]);
+
+        // Store user ID in the session
+        $request->session()->put('user_id', $user->id);
+
+        // Authenticate the user
+        Auth::login($user);
+
+        // Redirect to the cabin
+        return redirect('/cabin');
+    }
 })->name('start');
 
 Route::get('/about', function () {
@@ -47,9 +74,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/survey', [FeatureController::class, 'show'])->name('survey-area');
+Route::get('/survey', [FeatureController::class, 'showFeatures'])->name('survey-area');
 
-Route::post('/survey/store', [FeatureController::class, 'store'])->name('feature.store');
+Route::post('/survey/store', [FeatureController::class, 'storeFeatureName'])->name('feature.store');
 
 Route::get('/fish', function () {
     return view('fishing');

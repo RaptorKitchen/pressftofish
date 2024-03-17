@@ -25,21 +25,21 @@ var imagesReady = false;
 
 function enablestart() {
     if (videoReady && imagesReady) {
-        $(document).keypress(function(event) {
-            if (event.which === 97) {
-                startVideo();
-                positionWebGLCanvas();
-                var deformSelect = document.getElementById('deform');
-                var options = deformSelect.options;
-                var randomIndex = Math.floor(Math.random() * options.length);
-                deformSelect.selectedIndex = randomIndex;
+        startVideo();
+        positionWebGLCanvas();
 
-                // Trigger the change event if you have a listener for it
-                var event = new Event('change');
-                deformSelect.dispatchEvent(event);
-            }
-        });
-	}
+        var deformSelect = document.getElementById('deform');
+        var options = deformSelect.options;
+        var currentIndex = 0;
+
+        setInterval(function() {
+            deformSelect.selectedIndex = currentIndex;
+            var event = new Event('change');
+            deformSelect.dispatchEvent(event);
+
+            currentIndex = (currentIndex + 1) % options.length; // Cycle through options
+        }, 2000); // Change every 2 seconds
+    }
 }
 
 $(window).on('load', function() {

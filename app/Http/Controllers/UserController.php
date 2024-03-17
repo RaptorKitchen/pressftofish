@@ -28,4 +28,18 @@ class UserController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function startSession(Request $request)
+    {
+        // Check if the session already has a user ID
+        if (!session()->has('user_id')) {
+            // Create a new user record in the database
+            $user = User::create();
+    
+            // Store the user's ID in the session
+            session()->put('user_id', $user->id);
+        }
+    
+        return redirect()->route('features');
+    }
 }

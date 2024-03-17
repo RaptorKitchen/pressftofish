@@ -23,16 +23,17 @@ class AjaxController extends Controller
 
         switch ($route) {
             case 'start':
+                /*
                 if (Auth::check()) {
                     //$background = "./images/cabin-interior.webp";
                     //continue to cabin or last known location
-                    //$redirectTo = route($user->getLastPage());
+                    $redirectTo = route($user->getLastPage());
                 } else {
-                    $background = './images/pftf-cabin.gif';
+                    //$background = './images/pftf-cabin.gif';
                     $elements = view('auth.register')->render();
                 }
-/*
-                $dialogue = [
+*/
+/*                $dialogue = [
                     'text' => "<span class='speaker'>???</span> The cabin looks to be in great shape. Nothing a little dusting won't fix.<br />I better get ready for the day.",
                     'options' => [
                         ['text' => 'Press P to prepare for the day', 'action' => 'mirror'],
@@ -47,6 +48,10 @@ class AjaxController extends Controller
                 
                 ';
 */
+                $elements = "";
+                $background = "./images/off-to-fish.webp";
+                $autoTransitionLength = 2;
+                $autoTransitionDestination = "cabin";
                 $isCenterShard = true;
                 /*
                 if (Auth::check()) {
@@ -55,13 +60,17 @@ class AjaxController extends Controller
                     ";
                 }
                 */
-                //$background = "/images/cabin-interior.webp";
                 break;
             case 'survey':
-                $elements = "
-                
-                ";
+                $elements = view('feature')->render();
                 $background = "./images/world-overview.jpg";
+                $isCenterShard = true;
+                break;
+            case 'cabin':
+                $elements = view('cabin')->render();
+                $background = "./images/cabin-interior-clean-table.jpg";
+                $isCenterShard = true;
+                break;
             case 'cabin-after-survey':
                 $elements = '
                     <div class="row mt-5">
@@ -119,7 +128,13 @@ class AjaxController extends Controller
                 $background = "./images/off-to-fish.webp";
                 $isLeftShard = true;
                 $redirectTo = route('mirror');
-                break;                
+                break;
+            case 'login':
+                if (Auth::check()) {
+                } else {
+                    $elements = view('auth.login')->render();
+                }
+                break;        
             case 'interior-fish':
                 $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"f\":\"attempt-fish\"}'>Press F to Fish</h1>";
                 $background = "./images/fishing-view.webp";
