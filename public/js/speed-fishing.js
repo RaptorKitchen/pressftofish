@@ -1,3 +1,4 @@
+$('body').css('overflow', 'hidden');
 const lanes = {
     left: document.getElementById('speedLeftLane'),
     middle: document.getElementById('speedMiddleLane'),

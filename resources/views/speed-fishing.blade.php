@@ -47,7 +47,10 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <div class="fishing-bottom-panel"></div>
+                <div class="fishing-bottom-panel">
+                    <p class="text-center my-1">Instructions: Type "left" and "right" to change lanes. Type the name of the fish to catch it. You can only catch fish in one lane at a time.</p>
+                    <p class="text-center">Reach a score of 300 to continue</p>
+                </div>
             </div>
         </div>
     </div>

@@ -16,6 +16,9 @@ let isLineMoving = false;
 let isSwinging = true;
 let caughtElement = null;
 let retractSpeed = 5; // Default retract speed
+let fishAvailable = fishElements.length;
+
+$('body').css('overflow','hidden');
 
 function swingLine() {
     if (!isSwinging) return;
@@ -47,7 +50,6 @@ function checkCollision() {
                 caughtElement = fish;
                 retractSpeed = 2; // Middle speed for fish
                 lineDirection = -1; // Start retracting
-                setPositionAtLineEnd(fish); // Set position of caught fish
                 break;
             }
         }
@@ -58,7 +60,6 @@ function checkCollision() {
                 caughtElement = rock;
                 retractSpeed = 1; // Slowest speed for rocks
                 lineDirection = -1; // Start retracting
-                setPositionAtLineEnd(rock); // Set position of caught rock
                 break;
             }
         }
@@ -90,14 +91,20 @@ function castLine() {
                 caughtElement.style.top = (line.offsetTop + deltaY) + 'px';
             }
         } else {
-            lineDirection = 1;
-            isLineMoving = false;
-            isSwinging = true;
             if (caughtElement) {
+                if (caughtElement.classList.contains('fish')) {
+                    fishAvailable--;
+                    showModal('fish');
+                } else if (caughtElement.classList.contains('rock')) {
+                    showModal('rock');
+                }
                 // Clear the caught element
                 caughtElement.remove();
                 caughtElement = null;
             }
+            lineDirection = 1;
+            isLineMoving = false;
+            isSwinging = true;
         }
     }
 
@@ -125,56 +132,93 @@ setInterval(swingLine, 50);
 setInterval(castLine, 20);
 
 //modal code
-function showModal() {
-    let modal = document.getElementById('fullPageModal');
-    let resultText = document.getElementById('resultText');
-
-    // Add AJAX response text here
-    let html = '<div class="container text-center">';
-        html += '<div class="row">';
-            html += '<div class="col-12">';
-                html += '<h1>Fish Caught!</h1>';
-            html += '</div>';
-        html += '</div>';
-        html += '<div class="row">';
-            html += '<div class="col-6">[FISH IMAGE]</div>';
-            html += '<div class="col-6">';
-                html += '<div class="row">';
-                    html += '<div class="col-12">';
-                        html += '<h2>Fish Name</h2>';
-                        html += '<h4 class="font-italic">Latin Name</h4>';
-                        html += '<hr />';
+function showModal(fishOrRock) {
+    switch(fishOrRock) {
+        case 'fish':
+            console.log('fish caught');
+            $.ajax({
+                url: '/get-random-fish',
+                method: 'GET',
+                success: function(response) {
+                    console.log('Random fish:', response.name);
+                    let modal = document.getElementById('fullPageModal');
+                    let resultText = document.getElementById('resultText');
+                
+                    // Add AJAX response text here
+                    let html = '<div class="container text-center">';
+                        html += '<div class="row">';
+                            html += '<div class="col-12">';
+                            if (fishAvailable === 0) {
+                                html += '<h1>Last Fish Caught!</h1>';
+                            } else {
+                                html += '<h1>Fish Caught!</h1>';
+                            }
+                            html += '</div>';
+                        html += '</div>';
+                        html += '<div class="row">';
+                            html += '<div class="col-6"><img class="fish-image" src="../images/fish/'+response.image_url+'" width="100%"/></div>';
+                            html += '<div class="col-6">';
+                                html += '<div class="row">';
+                                    html += '<div class="col-12">';
+                                        html += '<h2>'+response.name+'</h2>';
+                                        html += '<h4 class="font-italic">'+response.latin_name+'</h4>';
+                                        html += '<hr />';
+                                    html += '</div>';
+                                html += '</div>';
+                                html += '<div class="row">';
+                                    html += '<div class="col-12">';
+                                        html += '<p class="mt-4">'+response.description+'</p>';
+                                    html += '</div>';
+                                html += '</div>';
+                            html += '</div>';
+                        html += '</div>';
+                        html += '<div class="row">';
+                            html += '<div class="col-12">';
+                                html += '<hr />';
+                                html += '<p>Further Reading: <a href="'+response.further_reading+'" target="_blank">'+response.further_reading+'</a>';
+                            html += '</div>';
+                        html += '</div>';
+                        html += '<div class="row">';
+                            html += '<div class="col-12">';
+                                if (fishAvailable === 0) {
+                                    html += "<p>You've caught every fish in the lake. You suspect there are more fish in the mountain streams.</h1>";
+                                    html += '<h1 class="floats">Press C to Climb the mountain.</h1>';
+                                } else {
+                                    html += '<h1 class="floats">Press C to Continue</h1>';
+                                }
+                            html += '</div>';
+                        html += '</div>';
                     html += '</div>';
-                html += '</div>';
-                html += '<div class="row">';
-                    html += '<div class="col-4"><span>[Fish Age]</span></div>';
-                    html += '<div class="col-4"><span>[Fish Weight]</span></div>';
-                    html += '<div class="col-4"><span>[Fish Length]</span></div>';
-                html += '</div>';
-                html += '<div class="row">';
-                    html += '<div class="col-12">';
-                        html += '<p>Fish Description</p>';
-                    html += '</div>';
-                html += '</div>';
-            html += '</div>';
-        html += '</div>';
-        html += '<div class="row">';
-            html += '<div class="col-12">';
-                html += '<h1>Press C to Continue</h1>';
-            html += '</div>';
-        html += '</div>';
-    html += '</div>';
-    
-    resultText.innerHTML = html;
-    
-
-    modal.style.display = 'block';
-
-    // Listen for 'c' keypress to close the modal
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'c' || event.key === 'C') {
-            modal.style.display = 'none';
-        }
-    });
+                    
+                    resultText.innerHTML = html;
+                    
+                
+                    modal.style.display = 'block';
+                
+                    // Listen for 'c' keypress to close the modal
+                    document.addEventListener('keydown', function(event) {
+                        if (event.key === 'c' || event.key === 'C') {
+                            if (fishAvailable === 0) {
+                            // are there any other fish left? if not, continue to mountain
+                            //trigger sound
+                            //wait 2 seconds
+                            window.location = '/speed-fishing';
+                            console.log('no more fish');
+                            } else {
+                                modal.style.display = 'none';
+                            }
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching random fish:', error);
+                }
+            });
+            break;
+        case 'rock' :
+            console.log('rock caught');
+            break;
+    }
 }
+
  

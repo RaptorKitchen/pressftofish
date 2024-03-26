@@ -21,7 +21,7 @@ $(document).ready(function() {
   
 function handleInput(inputValue) {
     // Array of available routes
-    const availableRoutes = ['start', 'mirror', 'cabin', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal'];
+    const availableRoutes = ['start', 'mirror', 'attempt-fish', 'cabin', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal'];
 
     if (availableRoutes.includes(inputValue)) {
         console.log(inputValue+' is a valid route');
@@ -45,6 +45,10 @@ function ajaxRefreshPageContent(inputValue) {
                 'shard-center': response.isCenterShard,
                 'shard-right': response.isRightShard
             };
+
+            if (response.autoTransitionDestination) {
+                bodyTransition(response.background);
+            }
 
             Object.keys(keywords).forEach(function(key) {
                 var shard = document.querySelector('.' + key);
@@ -82,6 +86,20 @@ function ajaxRefreshPageContent(inputValue) {
                                 $('#game-container').html(response.elements).fadeIn();
                                 // render dialogue when present
                                 renderResponseDialogue(response);
+                                // check for data-key-param elements in case this is a page that uses them
+                                var element = document.querySelector('[data-key-param]');
+    
+                                if (element) {
+                                    var keyParam = JSON.parse(element.getAttribute('data-key-param'));
+                                
+                                    document.addEventListener('keypress', function(event) {
+                                        var pressedKey = event.key.toLowerCase();
+                                
+                                        if (keyParam.hasOwnProperty(pressedKey)) {
+                                            handleInput(keyParam[pressedKey]);
+                                        }
+                                    });
+                                }
                             });
                             bodyTransition(response.background);
                         }
@@ -104,8 +122,8 @@ animateElements.forEach(function(element, index) {
 });
 
 function bodyTransition(background) {
-    $('#background-container').fadeOut(2000, function() {
-        $('#background-container').css("background-image", "url("+background+")").fadeIn("slow").fadeIn(2000);
+    $('#game-container').fadeOut(2000, function() {
+        $('#game-container').css("background-image", "url("+background+")").fadeIn("slow").fadeIn(2000);
     });
 }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Models\Fish;
 
 class AjaxController extends Controller
 {
@@ -51,7 +52,7 @@ class AjaxController extends Controller
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
                 $autoTransitionLength = 2;
-                $autoTransitionDestination = "cabin";
+                $redirectTo = "cabin";
                 $isCenterShard = true;
                 /*
                 if (Auth::check()) {
@@ -111,19 +112,14 @@ class AjaxController extends Controller
                 ";
                 $background = "./images/cabin-interior.webp";
                 break;
-            case 'leave-cabin':
+            case 'fish':
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
                 $autoTransitionLength = 2;
                 $autoTransitionDestination = "interior-fish";
-                break;
-            case 'appreciate-world':
-                //TODO: survey - how do you see the world? place of opportunity, possibility, danger
-                $elements = "";
-                $background = "./images/off-to-fish.webp";
+                $isCenterShard = true;
                 break;
             case 'mirror':
-                //TODO: survey - what do you see in self, what troubles you, what are your goals
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
                 $isLeftShard = true;
@@ -136,12 +132,12 @@ class AjaxController extends Controller
                 }
                 break;        
             case 'interior-fish':
-                $elements = "<h1 class='animate-text amarante-regular' data-key-param='{\"f\":\"attempt-fish\"}'>Press F to Fish</h1>";
+                $elements = "<h1 class='animate-text amarante-regular text-center' id='pressFtoFishText' data-key-param='{\"f\":\"attempt-fish\"}'>Press F to Fish</h1>";
                 $background = "./images/fishing-view.webp";
                 break;
             case 'attempt-fish':
                 //run random fish attempt, include livewell storage $this->attemptFish($livewell)
-                $redirectTo = route('fishing');
+                $elements = view('fishing')->render();
                 break;
             default:
                 // Handle unknown routes
@@ -162,13 +158,20 @@ class AjaxController extends Controller
         ]);
     }
 
-    public function fishAttempt()
+    public function getRandomFish()
     {
-        //generate random number between one and one thousand
-        $randomNumber = mt_rand(1, 1000);
-        //pull fish assigned range
-        return $randomNumber;
-
+        // Retrieve a random fish from the database
+        $fish = Fish::inRandomOrder()->first();
+    
+        // Return the fish details
+        return response()->json([
+            'id' => $fish->id,
+            'name' => $fish->name,
+            'latin_name' => $fish->latin_name,
+            'description' => $fish->description,
+            'image_url' => $fish->image_url,
+            'further_reading' => $fish->further_reading
+        ]);
     }
 
     public function storeFish($livewell)

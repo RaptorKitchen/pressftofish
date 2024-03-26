@@ -7,10 +7,8 @@
 @section('body')
     <div id="survey-container">
         <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
-            <div class="text-center">
-                <div id="game-container">
-                    <h1 class="animate-text amarante-regular remove-on-press">Type any object or feature you see</h1>
-                </div>
+            <div class="text-center">                
+                <h1 class="animate-text amarante-regular remove-on-press"></h1>
             </div>
         </div>
         <div class="row">
@@ -23,25 +21,6 @@
                 <div class="row">
                     <input type="text" id="inputField" class="w-50 m-auto mb-3 sway-input" style="border: 2px solid darkgrey" autofocus>
                 </div>
-                <div class="row">
-                    <div id="responseField">
-                        <div id="moutain" class="d-none">Mountain</div>
-                        <div id="lake" class="d-none">Lake</div>
-                        <div id="cave" class="d-none">Cave</div>
-                        <div id="trees" class="d-none">Trees</div>
-                        <div id="friends" class="d-none">Friends</div>
-                        <div id="snow" class="d-none">Snow</div>
-                        <div id="sand" class="d-none">Sand</div>
-                        <div id="beach" class="d-none">Beach</div>
-                        <div id="rocks" class="d-none">Rocks</div>
-                        <div id="birds" class="d-none">Birds</div>
-                        <div id="bird" class="d-none">Bird</div>
-                        <div id="clouds" class="d-none">Clouds</div>
-                        <div id="turtle" class="d-none">Turtle</div>
-                        <div id="dolphin" class="d-none">Dolphin</div>
-                    </div>
-                </div>
-                <!-- more elements here -->
             </div>
         </div>
     </div>

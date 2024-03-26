@@ -34,19 +34,33 @@ class FeatureController extends Controller
     
     public function storeFeatureName(Request $request)
     {
-        $featureName = $request->input('feature_name');
-        $featureId = $request->input('feature_id');
+        // Get the user from the session
+        $user = Auth::user();
     
-        // Store the feature name in the session
-        session()->put("features.$featureId", $featureName);
+        // Iterate through the submitted features
+        foreach ($request->input('feature', []) as $key => $value) {
+            // Update or create the feature for the user
+            Feature::updateOrCreate(
+                ['user_id' => $user->id, 'name' => $key],
+                ['value' => $value]
+            );
+        }
     
-        return back()->with('success', 'Feature name saved successfully.');
+        // Redirect back with a success message
+        return back()->with('success', 'Features updated successfully.');
     }
 
     public function showFeatures()
     {
         $features = session()->get('features', []);
-    
+        
+        if (Auth::check()) {
+            $user = Auth::user();
+        }
+
+        $userId = Auth::id();
+        $features = Feature::where('user_id', $userId)->pluck('value', 'name')->toArray();
+        
         return view('feature', compact('features'));
     }
     //clear with session()->forget('features');

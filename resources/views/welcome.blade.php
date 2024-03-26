@@ -8,37 +8,36 @@
     <div id="background-container">
         <div class="container d-flex align-items-center justify-content-center" style="min-height: 89vh;">
             <div class="text-center">
-                <div id="game-container">
-                    <div class="row">
-                        <div class="col-12">
-                            <img src="./images/pftf-logo.png" class="text-center img-responsive" width="350" style="margin-top: -35%; margin-bottom: 150px" id="animatedLogoPrimary" class="floats"/>
-                        </div>
+                <div class="row">
+                    <div class="col-12">
+                        <img src="./images/pftf-logo.png" class="text-center img-responsive" width="350" style="margin-top: -35%; margin-bottom: 150px" id="animatedLogoPrimary" class="floats"/>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <div class="input-container">
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div class="input-container">
                             <form id="startSession" action="{{ route('start') }}" method="POST">
                                 @csrf
-                                <input type="text" id="game-input" placeholder="Type start to begin...">
+                                <input type="text" id="game-input" placeholder="Type start to begin..." autocomplete="off">
                                 <span class="enter-icon">&#8629;</span>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="shard-container">
-                        <div class="shard-slice shard-left deg-minus-45">
-                            <p></p>
-                        </div>
-                        <div class="shard-slice shard-center">
-                            <p></p>
-                        </div>
-                        <div class="shard-slice shard-right deg-45">
-                            <p></p>
-                        </div>
+                </div>
+                <div class="shard-container">
+                    <div class="shard-slice shard-left deg-minus-45">
+                        <p></p>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-12">
-                            <div id="dialogue-container">
-                            </div>
+                    <div class="shard-slice shard-center">
+                        <p></p>
+                    </div>
+                    <div class="shard-slice shard-right deg-45">
+                        <p></p>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <div id="dialogue-container">
                         </div>
                     </div>
                 </div>
