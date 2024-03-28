@@ -155,6 +155,7 @@ form {
     left: 0; /* Changed to 0 */
     transform: translateX(0); /* Changed to 0 */
     width: 80%;
+    z-index: 1;
 }
 
 .fishing-background {

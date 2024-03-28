@@ -71,11 +71,11 @@
                                         <p class="card-text">I'm lucky enough to earn money doing something I love. If you have any interest in coding, whatsoever, I can't recommend the career enough. I've always loved solved puzzles. For most of my adult life, I've done it professionally.</p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">Early Press F to Fish Code, February 2024</small>
+                                        <small class="text-muted">Early Press F to Fish code, February 2024</small>
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <img src="images/keyclub.jpg" class="card-img-top" alt="Los Angeles Skyscrapers" />
+                                    <iframe class="card-img-top" height="424" src="https://www.youtube.com/embed/hDMNQOaO9TY?si=IRNZP-19rRUBkme0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                                     <div class="card-body">
                                         <h5 class="card-title">Music</h5>
                                         <p class="card-text">
@@ -83,7 +83,7 @@
                                         </p>
                                     </div>
                                     <div class="card-footer">
-                                        <small class="text-muted">The crowd at one of my band's shows in 2008</small>
+                                        <small class="text-muted"><a href="https://twitch.tv/raptorkitchen" target="_blank">Follow me on Twitch</a></small>
                                     </div>
                                 </div>
                                 <div class="card">
@@ -102,7 +102,7 @@
                                     <img src="images/red-wings.jpg" class="card-img-top" alt="Palm Springs Road" />
                                     <div class="card-body">
                                         <h5 class="card-title">Hockey</h5>
-                                        <p class="card-text">I've recently grown very fond of hockey, thanks in part to the 2023-2024 success of the Detroit Red Wings. What an exciting time to watch this historic team.</p>
+                                        <p class="card-text">I've recently grown very fond of hockey, thanks in part to the 2023-2024 mid-season success of the Detroit Red Wings. What an exciting time to watch this historic team.</p>
                                     </div>
                                     <div class="card-footer">
                                         <small class="text-muted">&copy; <a href="freep.com" target="_blank">Detroit Free Press</a></small>
@@ -163,7 +163,7 @@
                                 </div>
                             </div>
                             <p class="mt-5 mb-5">To go back to fishing, type "fish" here</p>
-                            <form method="get" action="{{route('last_known')}}">
+                            <form method="get" id="returnHomeForm">
                                 <input type="text" id="game-input" name="return" placeholder='Type "fish" to resume fishing...'>
                                 <span class="enter-icon">&#8629;</span>
                             </form>
@@ -173,4 +173,10 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('returnHomeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = "/";
+        });
+    </script>
 @endsection
