@@ -21,7 +21,7 @@ $(document).ready(function() {
   
 function handleInput(inputValue) {
     // Array of available routes
-    const availableRoutes = ['start', 'mirror', 'attempt-fish', 'cabin', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal'];
+    const availableRoutes = ['start', 'mirror', 'attempt-fish', 'cabin', 'survey', 'fish', 'mountain', 'shop', 'cave', 'journal', 'leave', 'take', 'feed'];
 
     if (availableRoutes.includes(inputValue)) {
         console.log(inputValue+' is a valid route');
@@ -40,6 +40,8 @@ function ajaxRefreshPageContent(inputValue) {
         method: 'GET',
         success: function(response) {
             console.log('page refresh successful');
+            const newUrl = '/' + inputValue;
+            history.pushState(null, '', newUrl);
             var keywords = {
                 'shard-left': response.isLeftShard,
                 'shard-center': response.isCenterShard,
@@ -47,7 +49,7 @@ function ajaxRefreshPageContent(inputValue) {
             };
 
             if (response.autoTransitionDestination) {
-                bodyTransition(response.background);
+                bodyTransition(response);
             }
 
             Object.keys(keywords).forEach(function(key) {
@@ -61,27 +63,40 @@ function ajaxRefreshPageContent(inputValue) {
                 }
             });
 
-            //replace the body content with the new content
+            // replace the body content with the new content
             $('#game-container').fadeOut(2000, function() {
                 console.log('body content refresh attempt');
                 $('#game-container').html(response.elements).fadeIn();
                 // render dialogue when present
                 renderResponseDialogue(response);
+                // remove strange glow container class
+                $('.strange-glow-container').removeClass('strange-glow-container');
             });
 
             if (response.background) {
-                bodyTransition(response.background);
+                bodyTransition(response);
             }
 
             if (response.autoTransitionDestination) {
+                let caveStatus = (response.caveStatus) ? '/' + response.caveStatus : '';
                 console.log('attempting auto-transition');
+                const newUrl = '/' + response.autoTransitionDestination;
+                history.pushState(null, '', newUrl);
                 setTimeout(() => {
                     $.ajax({
-                        url: '/ajax/' + response.autoTransitionDestination,
+                        url: '/ajax/' + response.autoTransitionDestination + caveStatus,
                         method: 'GET',
                         success:function(response) {
                             console.log('auto-transition succeeded');
                             $('#game-container').fadeOut(2000, function() {
+                                if (response.isCave) {
+                                    // remove off to fish background, remove regal gradient
+                                    $('#game-container').css( "background-image", response.background );
+                                    $('.gradient-background').css('background','linear-gradient(to bottom, #182644 0%, #514960 50%, #0c011b 80%)');
+                                    $('.gradient-background').css('background-color','#0c011b');
+                                    $('.gradient-background').css('background-repeat', 'no-repeat');
+                                    startCaveSection(response.caveStatus);
+                                }
                                 console.log('auto-transition content refresh');
                                 $('#game-container').html(response.elements).fadeIn();
                                 // render dialogue when present
@@ -101,7 +116,7 @@ function ajaxRefreshPageContent(inputValue) {
                                     });
                                 }
                             });
-                            bodyTransition(response.background);
+                            bodyTransition(response);
                         }
                     })
                 }, 4000);
@@ -121,9 +136,13 @@ animateElements.forEach(function(element, index) {
     element.style.animationDelay = index * 0.1 + 's';
 });
 
-function bodyTransition(background) {
+function bodyTransition(response) {
     $('#game-container').fadeOut(2000, function() {
-        $('#game-container').css("background-image", "url("+background+")").fadeIn("slow").fadeIn(2000);
+        $('#game-container').css("background-image", "url("+response.background+")").fadeIn("slow").fadeIn(2000);
+        if (response.bodyBackground) {
+            $('body').css("background-image", response.bodyBackground).fadeIn("slow").fadeIn(2000);
+            $('body').css("background-repeat", response.bodyBackgroundRepeat).fadeIn("slow").fadeIn(2000);
+        }
     });
 }
 
@@ -142,6 +161,31 @@ function shakeInput() {
     setTimeout(() => {
         $(inputField).parent().removeClass('shake');
     }, 1000);
+}
+
+function startCaveSection(status) {
+    console.log('cave status: ', status);
+    setTimeout(() => {
+        shakeBodyAndFadeInElderFish();
+        // TODO: start elder fish dialogue featuring status
+            // left strange fish
+                // questionaire?
+            // took strange fish
+                // simple rpg battle using static set of fish for now
+            // fed strange fish
+                // trivia?
+        // TODO: last game depends on status
+    }, 2000);
+}
+
+function shakeBodyAndFadeInElderFish() {
+    $('body').addClass('shake');
+    $('body').css('overflow','hidden');
+    setTimeout(function() {
+        $('body').removeClass('shake');
+        $('body').css('overflow','inherit');
+        $('#elderFish').fadeIn('slow');
+    }, 4000);
 }
 
 $('#startForm').submit(function(event) {

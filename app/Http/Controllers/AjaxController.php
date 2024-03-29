@@ -9,7 +9,7 @@ use App\Models\Fish;
 
 class AjaxController extends Controller
 {
-    public function handleRequest($route)
+    public function handleRequest($route, $caveStatus = null)
     {
         // Implement logic for handling different AJAX routes
         $elements = "";
@@ -21,10 +21,12 @@ class AjaxController extends Controller
         $isLeftShard = false;
         $isCenterShard = false;
         $isRightShard = false;
+        $bodyBackground = "url(/images/regal.png), linear-gradient(to bottom, #feefcc 0%, #1f130c 80%);";
+        $bodyBackgroundRepeat = "repeat, no-repeat;";
 
         switch ($route) {
             case 'start':
-                /*
+/*
                 if (Auth::check()) {
                     //$background = "./images/cabin-interior.webp";
                     //continue to cabin or last known location
@@ -33,34 +35,20 @@ class AjaxController extends Controller
                     //$background = './images/pftf-cabin.gif';
                     $elements = view('auth.register')->render();
                 }
-*/
-/*                $dialogue = [
+
+                $dialogue = [
                     'text' => "<span class='speaker'>???</span> The cabin looks to be in great shape. Nothing a little dusting won't fix.<br />I better get ready for the day.",
                     'options' => [
                         ['text' => 'Press P to prepare for the day', 'action' => 'mirror'],
                         ['text' => 'Quit Game', 'action' => 'quitGame'],
                     ],
                 ];
-
-                $elements = '
-                    <h1 class="animate-text amarante-regular" data-destination="leave-cabin-left" style="left:250px; top: -90px;">Type "fish" to fulfill your purpose</h1>
-                    <h1 class="animate-text amarante-regular" data-destination="leave-cabin-left" style="left:450px; top: -30px;">Type "survey" to get your bearings</h1>
-                    <h1 class="animate-text amarante-regular" data-destination="leave-cabin-left" style="left:450px; top: -30px;">Type "dust" to dust the room</h1>
-                
-                ';
 */
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
                 $autoTransitionLength = 2;
                 $redirectTo = "cabin";
                 $isCenterShard = true;
-                /*
-                if (Auth::check()) {
-                    $elements = "
-                        <h1 class='animate-text amarante-regular' data-key-param='{\"a\":\"survey-surroundings\"}' style='left:250px; top: -90px;'>Press C to Continue</h1>
-                    ";
-                }
-                */
                 break;
             case 'survey':
                 $elements = view('feature')->render();
@@ -139,6 +127,57 @@ class AjaxController extends Controller
                 //run random fish attempt, include livewell storage $this->attemptFish($livewell)
                 $elements = view('fishing')->render();
                 break;
+            case 'leave':
+                $elements = "";
+                $isLeftShard = true;
+                $background = "./images/off-to-fish-night.jpg";
+                $autoTransitionLength = 2;
+                $autoTransitionDestination = "cave";
+                $caveStatus = 'left';
+                break;
+            case 'take':
+                $elements = "";
+                $isCenterShard = true;
+                $background = "./images/off-to-fish-night.jpg";
+                $autoTransitionLength = 2;
+                $autoTransitionDestination = "cave";
+                $caveStatus = 'taken';
+                break;
+            case 'feed':
+                $elements = "";
+                $isRightShard = true;
+                $background = "./images/off-to-fish-night.jpg";
+                $autoTransitionLength = 2;
+                $autoTransitionDestination = "cave";
+                $caveStatus = 'fed';
+                break;
+            case 'cave':
+                $elements = "";
+                $background = "linear-gradient(to bottom, #182644 0%, #514960 50%, #0c011b 80%)";
+                $elements = view('cave')->render();
+                $isCave = true;
+                break;
+            case 'cave/left':
+                $elements = "";
+                $background = "linear-gradient(to bottom, #182644 0%, #514960 50%, #0c011b 80%)";
+                $elements = view('cave')->render();
+                $isCave = true;
+                $caveStatus = 'left';
+                break;
+            case 'cave/taken':
+                $elements = "";
+                $background = "linear-gradient(to bottom, #182644 0%, #514960 50%, #0c011b 80%)";
+                $elements = view('cave')->render();
+                $caveStatus = 'taken';
+                $isCave = true;
+                break;
+            case 'cave/fed':
+                $elements = "";
+                $background = "linear-gradient(to bottom, #182644 0%, #514960 50%, #0c011b 80%)";
+                $elements = view('cave')->render();
+                $isCave = true;
+                $caveStatus = 'fed';
+                break;
             default:
                 // Handle unknown routes
                 $elements = '<h1>Unknown Route</h1>';
@@ -154,7 +193,11 @@ class AjaxController extends Controller
             'dialogue' => $dialogue,
             'isLeftShard' => $isLeftShard,
             'isCenterShard' => $isCenterShard,
-            'isRightShard' => $isRightShard
+            'isRightShard' => $isRightShard,
+            'bodyBackground' => $bodyBackground,
+            'bodyBackgroundRepeat' => $bodyBackgroundRepeat,
+            'caveStatus' => $caveStatus ?? null,
+            'isCave' => $isCave ?? null
         ]);
     }
 

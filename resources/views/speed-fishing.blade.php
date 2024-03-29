@@ -4,7 +4,7 @@
 @endsection
 @section('body')
     <div class="fishing-background">
-        <div class="gradient-background">
+        <div class="speed-background">
             <div class="content-container">
                 <div id="fullPageModal" class="modal diamondBackground">
                     <div class="modal-content">
@@ -24,20 +24,36 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-5"></div>
+                        <div class="col-2">
+                            <div id="scoreDisplay" class="text-center">Score: 0</div>
+                        </div>
+                        <div class="col-5"></div>
+                        <div id="speedFisherContainer" class="col-12">
+                            <div class="row">
+                                <div class="col-4">
+                                    <div id="fisherman_left" class="fisherman left mt-4 fs-3 jiggle">🎣</div>
+                                </div>
+                                <div class="col-4">
+                                    <div id="fisherman_middle" class="fisherman middle mt-4 fs-3 jiggle" style="display: block">🎣</div>
+                                </div>
+                                <div class="col-4">
+                                    <div id="fisherman_right" class="fisherman right mt-4 fs-3 jiggle">🎣</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12">
                             <center>
                                 <div id="speedGameContainer">
-                                    <div id="scoreDisplay">Score: 0</div>
                                     <div class="speed-lane" id="speedLeftLane">
-                                        <div id="player" class="fisherman left">🎣</div>
                                     </div>
-                                    <div class="speed-lane" id="speedMiddleLane">
-                                        <div id="player" class="fisherman middle">🎣</div>
+                                    <div class="speed-lane active-lane" id="speedMiddleLane">
                                     </div>
                                     <div class="speed-lane" id="speedRightLane">
-                                        <div id="player" class="fisherman right">🎣</div>
                                     </div>
-                                    <input type="text" id="speedFishGameInput" placeholder="Type to fish...">
+                                    <input type="text" id="speedFishGameInput" placeholder="Type to fish..." autofocus>
                                 </div>
                             </center>
                         </div>
@@ -48,8 +64,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="fishing-bottom-panel">
-                    <p class="text-center my-1">Instructions: Type "left" and "right" to change lanes. Type the name of the fish to catch it. You can only catch fish in one lane at a time.</p>
-                    <p class="text-center">Reach a score of 300 to continue</p>
+                    <p class="text-center my-1">Instructions: Type "left" and "right" to change lanes. Type the name of the fishing concept or term to catch it. You can only catch fish in one lane at a time.</p>
+                    <p class="text-center">Reach a score of 100 to continue</p>
                 </div>
             </div>
         </div>

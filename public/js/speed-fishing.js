@@ -4,7 +4,6 @@ const lanes = {
     middle: document.getElementById('speedMiddleLane'),
     right: document.getElementById('speedRightLane')
 };
-const player = document.getElementById('player');
 const gameInput = document.getElementById('speedFishGameInput');
 const scoreDisplay = document.getElementById('scoreDisplay');
 let currentLane = 'middle';
@@ -22,7 +21,7 @@ function spawnFish() {
     const randomLaneKey = laneKeys[Math.floor(Math.random() * laneKeys.length)];
 
     // Check if the last fish has moved up enough to spawn a new one
-    if (laneFishPositions[randomLaneKey] < 300) { // Adjusted to 300
+    if (laneFishPositions[randomLaneKey] < 100) {
         return;
     }
 
@@ -40,11 +39,11 @@ function spawnFish() {
         fish.style.bottom = `${fishPosition}px`;
         laneFishPositions[randomLaneKey] = fishPosition; // Update the position of the last fish
 
-        if (fishPosition >= 550) {
+        if (fishPosition >= 450) {
             clearInterval(fishInterval);
             fish.remove();
         }
-    }, 1000);
+    }, 100);
 
     setTimeout(() => { fish.style.borderColor = 'yellow'; }, 30000);
     setTimeout(() => { fish.style.borderColor = 'red'; }, 50000);
@@ -52,66 +51,67 @@ function spawnFish() {
 
 function getRandomFishData() {
     const options = [
-        { title: 'Salmon', points: 5 },
-        { title: 'Fishing Rod', points: 10 },
-        { title: 'Tackle Box', points: 15 },
-        { title: 'Lure', points: 10 },
-        { title: 'Trout', points: 5 },
-        { title: 'Bass', points: 5 },
-        { title: 'Reel', points: 10 },
-        { title: 'Line', points: 5 },
-        { title: 'Hook', points: 5 },
-        { title: 'Bait', points: 10 },
-        { title: 'Net', points: 10 },
-        { title: 'Waders', points: 15 },
-        { title: 'Cast', points: 5 },
-        { title: 'Catch and Release', points: 20 },
-        { title: 'Fly Fishing', points: 15 },
-        { title: 'Catfish', points: 5 },
-        { title: 'Carp', points: 5 },
-        { title: 'Spinnerbait', points: 10 },
-        { title: 'Jig', points: 10 },
-        { title: 'Pike', points: 5 },
-        { title: 'Walleye', points: 5 },
-        { title: 'Crappie', points: 5 },
-        { title: 'Trolling', points: 10 },
-        { title: 'Chumming', points: 15 },
-        { title: 'Swivel', points: 5 },
-        { title: 'Leader', points: 5 },
-        { title: 'Sinkers', points: 5 },
-        { title: 'Bobber', points: 5 },
-        { title: 'Plastic Worms', points: 10 },
-        { title: 'Topwater Lures', points: 10 },
-        { title: 'Fishing Vest', points: 10 },
-        { title: 'Depth Finder', points: 15 },
-        { title: 'Drift Fishing', points: 10 },
-        { title: 'Spoons', points: 5 },
-        { title: 'Gaff', points: 10 },
-        { title: 'Live Bait', points: 10 },
-        { title: 'Artificial Bait', points: 10 },
-        { title: 'Barbless Hook', points: 5 },
-        { title: 'Fish Finder', points: 15 },
-        { title: 'Fishing License', points: 10 },
-        { title: 'Fishing Knots', points: 10 },
-        { title: 'Ice Fishing', points: 10 },
-        { title: 'Surf Fishing', points: 10 },
-        { title: 'Trolling Motor', points: 15 },
-        { title: 'Fishing Charter', points: 15 },
-        { title: 'Fishing Tournament', points: 20 },
-        { title: 'Catch Limit', points: 10 },
-        { title: 'Filleting Knife', points: 10 },
-        { title: 'Marlin', points: 5 },
-        { title: 'Tuna', points: 5 },
-        { title: 'Mackerel', points: 5 },
-        { title: 'Mahi Mahi', points: 10 },
-        { title: 'Swordfish', points: 10 },
-        { title: 'Snapper', points: 5 },
-        { title: 'Grouper', points: 5 },
-        { title: 'Fishing Diary', points: 15 },
-        { title: 'Tide Chart', points: 10 },
-        { title: 'Fishing Etiquette', points: 15 },
-        { title: 'Fish Handling', points: 10 },
-        { title: 'Fishing Technique', points: 10 }
+        { title: 'salmon', points: 5 },
+        { title: 'fishing rod', points: 10 },
+        { title: 'boot', points: 0 },
+        { title: 'tackle box', points: 15 },
+        { title: 'lure', points: 10 },
+        { title: 'trout', points: 5 },
+        { title: 'bass', points: 5 },
+        { title: 'reel', points: 10 },
+        { title: 'line', points: 5 },
+        { title: 'hook', points: 5 },
+        { title: 'bait', points: 10 },
+        { title: 'net', points: 10 },
+        { title: 'waders', points: 15 },
+        { title: 'cast', points: 5 },
+        { title: 'catch and release', points: 20 },
+        { title: 'fly fishing', points: 15 },
+        { title: 'catfish', points: 5 },
+        { title: 'carp', points: 5 },
+        { title: 'spinnerbait', points: 10 },
+        { title: 'jig', points: 10 },
+        { title: 'pike', points: 5 },
+        { title: 'walleye', points: 5 },
+        { title: 'crappie', points: 5 },
+        { title: 'trolling', points: 10 },
+        { title: 'chumming', points: 15 },
+        { title: 'swivel', points: 5 },
+        { title: 'leader', points: 5 },
+        { title: 'sinkers', points: 5 },
+        { title: 'bobber', points: 5 },
+        { title: 'plastic worms', points: 10 },
+        { title: 'topwater lures', points: 10 },
+        { title: 'fishing vest', points: 10 },
+        { title: 'depth finder', points: 15 },
+        { title: 'drift fishing', points: 10 },
+        { title: 'spoons', points: 5 },
+        { title: 'gaff', points: 10 },
+        { title: 'live bait', points: 10 },
+        { title: 'artificial bait', points: 10 },
+        { title: 'barbless hook', points: 5 },
+        { title: 'fish finder', points: 15 },
+        { title: 'fishing license', points: 10 },
+        { title: 'fishing knots', points: 10 },
+        { title: 'ice fishing', points: 10 },
+        { title: 'surf fishing', points: 10 },
+        { title: 'trolling motor', points: 15 },
+        { title: 'fishing charter', points: 15 },
+        { title: 'fishing tournament', points: 20 },
+        { title: 'catch limit', points: 10 },
+        { title: 'filleting knife', points: 10 },
+        { title: 'marlin', points: 5 },
+        { title: 'tuna', points: 5 },
+        { title: 'mackerel', points: 5 },
+        { title: 'mahi mahi', points: 10 },
+        { title: 'swordfish', points: 10 },
+        { title: 'snapper', points: 5 },
+        { title: 'grouper', points: 5 },
+        { title: 'fishing diary', points: 15 },
+        { title: 'tide chart', points: 10 },
+        { title: 'fishing etiquette', points: 20 },
+        { title: 'fish handling', points: 10 },
+        { title: 'fishing technique', points: 15 }
     ];    
 
     return options[Math.floor(Math.random() * options.length)];
@@ -147,9 +147,9 @@ function movePlayer(direction) {
 }
 
 function updatePlayerPosition(currentLane) {
-    console.log(currentLane);
+    console.log('#fisherman_'+currentLane);
     $('.fisherman').hide();
-    $('.fisherman .'+currentLane).show();
+    $('#fisherman_'+currentLane).show();
 }
 
 function highlightActiveLane() {
@@ -166,6 +166,10 @@ function checkCatch(value) {
     if (fish) {
         score += parseInt(fish.dataset.points);
         scoreDisplay.textContent = `Score: ${score}`;
+        if (score >= 100) {
+            //win condition - show win modal
+            showModal();
+        }
         displayPoints(fish.dataset.points, fish.getBoundingClientRect());
         fish.remove();
     }
@@ -184,6 +188,44 @@ function displayPoints(points, fishRect) {
     }, 2000);
 }
 
+function showModal() {
+    let modal = document.getElementById('fullPageModal');
+    let resultText = document.getElementById('resultText');
+    let html = '<div class="container text-center">';
+        html += '<div class="row">';
+            html += '<div class="col-12">';
+                html += '<h1>Congratulations!</h1>';
+                html += '<hr>';
+            html += '</div>';
+        html += '</div>';
+        html += '<div class="row">';
+            html += '<div class="col-12"><img class="" src="../images/snowy-sunset.jpg" width="100%"/></div>';
+            html += '<div class="col-12">';
+                html += '<p>Satisfied with your catch, you begin to make preparations to return to your boat. In the diminished light of the setting sun, you observe an unatural glow near the mountaintop.</p>';
+                html += '<p>You are compelled to investigate it.</p>';
+            html += '</div>';
+        html += '<div class="row">';
+            html += '<div class="col-12">';
+                html += '<h1 class="floats">Press I to investigate the strange glow.</h1>';
+            html += '</div>';
+        html += '</div>';
+    html += '</div>';
+    
+    resultText.innerHTML = html;
+    
+
+    modal.style.display = 'block';
+                
+    // Listen for 'i' keypress to close the modal
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'i' || event.key === 'I') {
+            //TODO: trigger sound
+            //TODO: timeout 2 seconds
+            window.location = '/strange-glow';
+        }
+    });
+}
+
 setInterval(spawnFish, 5000);
-updatePlayerPosition();
+$("#fisherman_left, #fisherman_right").hide();
 highlightActiveLane();

@@ -37,9 +37,6 @@ Route::get('/', function (Request $request) {
 
         // Authenticate the user
         Auth::login($user);
-
-        // Redirect to the cabin
-        return redirect('/cabin');
     }
 
     return view('welcome');
@@ -53,7 +50,7 @@ Route::get('/about-me', function () {
     return view('about-me');
 })->name('about_me');
 
-Route::get('/ajax/{route}', [AjaxController::class, 'handleRequest']);
+Route::get('/ajax/{route}/{caveStatus?}', [AjaxController::class, 'handleRequest']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -102,12 +99,20 @@ Route::middleware('web')->group(function () {
     Route::get('/cabin', function () {
         return view('cabin');
     })->name('cabin');
+
+    Route::get('/cave/{caveStatus?}', function ($caveStatus = null) {
+        return view('cave', ['caveStatus' => $caveStatus]);
+    })->name('cave');  
     
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::get('/get-random-fish', [AjaxController::class, 'getRandomFish'])->name('get-random-fish');
+
+    Route::get('/strange-glow', function () {
+        return view('strange-glow');
+    })->name('strange-glow');
 
     Route::get('/survey', [FeatureController::class, 'showFeatures'])->name('survey-area');
 

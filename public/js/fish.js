@@ -200,8 +200,8 @@ function showModal(fishOrRock) {
                         if (event.key === 'c' || event.key === 'C') {
                             if (fishAvailable === 0) {
                             // are there any other fish left? if not, continue to mountain
-                            //trigger sound
-                            //wait 2 seconds
+                            //TODO: trigger sound
+                            //TODO: timeout 2 seconds
                             window.location = '/speed-fishing';
                             console.log('no more fish');
                             } else {

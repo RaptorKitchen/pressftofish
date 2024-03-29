@@ -149,6 +149,25 @@ form {
     background-size: contain;
     background-position: center;
 }
+
+.strange-glow-container {
+    background: url('/images/strange-fish.jpg') !important;
+    background-repeat: no-repeat;
+    background-size: contain !important;
+    background-position: center;
+}
+
+.cave-container {
+    background: url('/images/cave-background.png') !important;
+    background-repeat: no-repeat;
+    background-size: contain !important;
+    background-position: center;
+}
+
+#elderFish {
+    display: none;
+}
+
 #game-input {
     position: relative; /* Changed to relative */
     bottom: 100px;
@@ -245,12 +264,62 @@ form {
     opacity: 0;
 }
 
-#fishArea, #speedGameContainer {
+#fishArea {
     position: relative;
     width: 1000px;
     height: 600px;
     background-image: url('/images/underwater.jpg');
     background-position: center;
+    background-repeat: no-repeat;
+}
+
+#speedGameContainer {
+    position: relative;
+    width: 620px;
+    height: 515px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 20px;
+}
+
+.speed-background {
+    #scoreDisplay {
+        color: #333;
+        background: #fefef2;
+        border-radius: 8px;
+        width: 100px;
+        margin: 0 auto;
+        margin-bottom: -25px;
+    }
+}
+
+#speedFisherContainer {
+    width: 620px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.speed-background {
+    background: url("/images/speed-fishing-body-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#speedLeftLane {
+    background: url('/images/speed-left-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#speedMiddleLane {
+    background: url('/images/speed-middle-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#speedRightLane {
+    background: url('/images/speed-right-background.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -465,18 +534,18 @@ form {
 
 .speed-lane {
     position: absolute;
-    width: 33.33%;
+    width: 168px;
     height: 100%;
     bottom: 0;
 }
 
 #speedLeftLane {
-    left: 0;
+    left: 6.5%;
     border-right: 1px solid #000;
 }
 
 #speedMiddleLane {
-    left: 33.33%;
+    left: 37.33%;
     border-right: 1px solid #000;
 }
 
@@ -491,6 +560,22 @@ form {
     transform: translateX(-50%);
     font-size: 24px;
 }
+
+@keyframes jiggle {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25%, 75% {
+      transform: rotate(25deg);
+    }
+    50% {
+      transform: rotate(-25deg);
+    }
+  }
+  
+  .jiggle {
+    animation: jiggle 2s cubic-bezier(0.1, 0.1, 0.9, 0.9) infinite;
+  }    
 
 .speed-fish {
     position: absolute;
@@ -554,4 +639,22 @@ form {
     25% { opacity: 1; }
     75% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.8s ease-in-out 5;
+}
+
+.cave-input {
+    bottom: -5% !important;
+}
+
+.cave-dialogue-container {
+    margin-top: -35%;
 }
