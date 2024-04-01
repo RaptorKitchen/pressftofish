@@ -25,25 +25,11 @@ class AjaxController extends Controller
         $bodyBackgroundRepeat = "repeat, no-repeat;";
 
         switch ($route) {
+            case 'home':
+                $elements = view('welcome')->render();
+                $background = "./images/pftf-cabin.gif";
+                break;
             case 'start':
-/*
-                if (Auth::check()) {
-                    //$background = "./images/cabin-interior.webp";
-                    //continue to cabin or last known location
-                    $redirectTo = route($user->getLastPage());
-                } else {
-                    //$background = './images/pftf-cabin.gif';
-                    $elements = view('auth.register')->render();
-                }
-
-                $dialogue = [
-                    'text' => "<span class='speaker'>???</span> The cabin looks to be in great shape. Nothing a little dusting won't fix.<br />I better get ready for the day.",
-                    'options' => [
-                        ['text' => 'Press P to prepare for the day', 'action' => 'mirror'],
-                        ['text' => 'Quit Game', 'action' => 'quitGame'],
-                    ],
-                ];
-*/
                 $elements = "";
                 $background = "./images/off-to-fish.webp";
                 $autoTransitionLength = 2;

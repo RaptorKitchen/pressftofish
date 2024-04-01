@@ -39,6 +39,10 @@ Route::get('/', function (Request $request) {
         Auth::login($user);
     }
 
+    return view('splash');
+})->name('splash');
+
+Route::get('/start', function (Request $request) {
     return view('welcome');
 })->name('start');
 
