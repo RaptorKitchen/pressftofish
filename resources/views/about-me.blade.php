@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-12">
                             <p>My name is Andrew Lerma.</p>
-                            <p>I'm a web developer with over <del>{{ date('Y') - 2008 - 1 }}</del> {{ date('Y') - 2008 }} years of experience creating professional web sites and web applications.</p>
+                            <p>I'm a web developer with over <del>{{ date('Y') - 2008 - 1 }}</del> {{ date('Y') - 2008 }} years of experience creating professional web sites and web applications. More professional than this one, anyway.</p>
                             <hr />
                             <p>My current class schedule is as follows:</p>
                             <table class="table">

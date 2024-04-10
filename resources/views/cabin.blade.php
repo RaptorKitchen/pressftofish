@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-4"></div>
                                 <div class="col-4 w-100">
-                                    <p id="centerChoiceLabel" class="choice-label floats">Type "fish" to find your purpose</p>
+                                    <p id="centerChoiceLabel" class="choice-label floats">Type "fish" to get fishing.</p>
                                 </div>
                                 <div class="col-4"></div>
                             </div>

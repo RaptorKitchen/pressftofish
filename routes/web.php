@@ -81,7 +81,6 @@ Route::middleware('web')->group(function () {
             // Session exists, redirect to the cabin
             return redirect('/cabin');
         } else {
-            dd('session no exists');
             // Create a new user or retrieve an existing one
             $user = User::firstOrCreate([
                 'name' => 'Guest',

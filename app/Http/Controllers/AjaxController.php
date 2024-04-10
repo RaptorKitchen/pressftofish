@@ -116,7 +116,7 @@ class AjaxController extends Controller
             case 'leave':
                 $elements = "";
                 $isLeftShard = true;
-                $background = "./images/off-to-fish-night.jpg";
+                $background = "./images/off-to-fish-night-3.png";
                 $autoTransitionLength = 2;
                 $autoTransitionDestination = "cave";
                 $caveStatus = 'left';
@@ -124,7 +124,7 @@ class AjaxController extends Controller
             case 'take':
                 $elements = "";
                 $isCenterShard = true;
-                $background = "./images/off-to-fish-night.jpg";
+                $background = "./images/off-to-fish-night-3.png";
                 $autoTransitionLength = 2;
                 $autoTransitionDestination = "cave";
                 $caveStatus = 'taken';
@@ -132,7 +132,7 @@ class AjaxController extends Controller
             case 'feed':
                 $elements = "";
                 $isRightShard = true;
-                $background = "./images/off-to-fish-night.jpg";
+                $background = "./images/off-to-fish-night-3.png";
                 $autoTransitionLength = 2;
                 $autoTransitionDestination = "cave";
                 $caveStatus = 'fed';

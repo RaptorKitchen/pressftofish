@@ -1,15 +1,25 @@
 var inputField = document.getElementById('game-input');
+var caveInputField = document.getElementById('cave-input');
 
 $(document).ready(function() {
     console.log('dom ready, listening for keypresses');
     $(inputField).focus();
+    $(caveInputField).focus();
     $(inputField).on('keydown', function(event) {
         if (event.key === 'Enter') {
             var inputValue = $(this).val().toLowerCase();
             console.log(inputValue + ' submitted');
-            $(this).val(''); // Clear the input field
-            // Handle the input value (e.g., check for commands or dialogue options)
+            $(this).val('');
             handleInput(inputValue);
+        }
+    });
+    $(caveInputField).on('keydown', function(event) {
+        var round = $('#round').val();
+        if (event.key === 'Enter') {
+            var inputValue = $(this).val().toLowerCase();
+            console.log(inputValue + ' submitted');
+            $(this).val('');
+            handleCaveInput(inputValue, round);
         }
     });
     $.ajaxSetup({
@@ -28,6 +38,127 @@ function handleInput(inputValue) {
         ajaxRefreshPageContent(inputValue);
     } else {
         console.log(inputValue+' is an invalid route');
+        // Invalid command
+        shakeInput();
+    }
+}
+
+function handleCaveInput(inputValue, round) {
+    // Object of available responses for each round
+    const availableResponses = {
+        '1': [
+            '3', 'three', 'release', 'kill', 'inspect', 'tasty', 'apologize', 'question', 'leave', 'run', 'flee', 'help', 'fight', 'attack'
+        ],
+        '2': [
+            'who', 'why', 'what'
+        ],
+        '3': [],
+        '4': [],
+        '5': []
+    };
+
+    // validate responses
+    if (availableResponses[round] && availableResponses[round].includes(inputValue)) {
+        console.log(inputValue + ' is a valid route');
+        if (round == 1) {
+            switch(inputValue) {
+                case ('3' || 'three'):
+                    updateCaveChoices("The creature seems pleased with your answer. It smears a new message onto the cave walls:",'✡︎','✞','☪',2);
+                    break;
+                case 'release':
+                    updateCaveChoices("The creature before you makes a series of squeals and clicking noises that reverberate throughout the walls of the cave. You suspect the creature is trying to communicate. It smears bioluminscent ink along the walls:","🐟 + 🐟","+ 🐟 = ", "?", 1);
+                    break;
+                case 'kill':
+                    updateCaveChoices("The creature before you unleashes an ear-splitting scream. You feel a force slithering into your mind. For a moment you think you can focus your thoughts and fight it, but you also feel a growing desire to relax your mind and let go.","<em>Focus</em> your mind to fight the invading presence","<em>Let go</em>, and accept the invading prescence","<em>Flee</em>",2);
+                    break;
+                case 'inspect':
+                    updateCaveChoices("The strange fish stops thrashing, turning one of it's glowing eyes upon you. The assault of the clicks lessen to a comfortable volume. The cacophony of sounds become organized. \"Fish-\"... \"Fisherman...\" You can now make sense of the clicks, hear the elegance in the rhythms.  The creature is asking a question.<br />\"Why, fisherman. Why did you take my fish?\"","To <em>study</em> it.","To <em>sell</em> it.","To <em>eat</em> it",2);
+                    break;
+                case 'tasty':
+                    updateCaveChoices("The creature makes a sound that could be considering crying or laughter. You're not sure which. Maybe it's both.","<em>Laugh</em> with the creature.","<em>Cry</em> with the creature.","Stay <em>silent</em>",2);
+                    break;
+                case 'apologize':
+                    updateCaveChoices("The creature seems intrigued. This time it brings forward three images: the first; a galaxy, the second; a tornado, the last; a hurricane.","Say you see <em>chaos</em>","Say you see <em>order</em>.","Say you see <em>spirals</em>",2);
+                    break;
+                case 'question':
+                    updateCaveChoices("The creature becomes silent.","<em>Who</em> are you?","","<em>What</em> do you want?",2);
+                    break;
+                case 'leave' || 'run' || 'flee':
+                    //can't leave
+                    updateAdditionalText("You turn to make a run for the mouth of the cave. Within two strides your vision goes dark and your legs go limp. You find yourself facing the creature again. It won't let you flee.");
+                    break;
+                case 'fight' || 'attack':
+                    updateAdditionalText("You tense your muscles up in preparation for a wild swing on the creature before you. The creature sounds an incapacitating shrill. ");
+                case 'help':
+                    updateAdditionalText("Considering what the creature did to your ship, you think it could make quick work of you. Best to play along and figure out what it wants.");
+                    break;
+            }
+        }
+        if (round == 2) {
+            switch(inputValue) {
+                case "focus":
+                    // darken page
+                    // pulse animation
+                    initializeGrid('focus');
+                    break;
+                case "fight":
+                    // darken
+                    // show health
+                    // dice roll for attack, unwinnable
+                    break;
+                case "flee":
+                    // darken page
+                    // pulse animation
+                    initializeGrid('flee');
+                    break;
+                case "religion" || "religious symbols" || "religions" || "religious":
+                    //updateCaveChoices("The creature seems pleased that you've have some understanding of religion.","","","",3);
+                    break;
+                case "study":
+                    // imprison, make screensaver
+                    break;
+                case "sell":
+                    // prepare for sell
+                    break;
+                case "eat":
+                    // prepare for meal
+                    break;
+                case "laugh":
+                    // jokes? release
+                    break;
+                case "cry":
+                    // comfort, release
+                    break;
+                case "silent":
+                    //  comfort, release
+                    break;
+                case "chaos":
+                    // universe ending
+                    break;
+                case "order":
+                    // universe ending
+                    break;
+                case "spirals":
+                    // madness ending
+                    break;
+            }
+        }
+        /* future rounds
+        if (round == 3) {
+            switch(inputValue) {
+            }
+        }
+        if (round == 4) {
+            switch(inputValue) {
+            }
+        }
+        if (round == 5) {
+            switch(inputValue) {
+            }
+        }
+        */
+    } else {
+        console.log(inputValue + ' is an invalid route');
         // Invalid command
         shakeInput();
     }
@@ -161,21 +292,54 @@ function shakeInput() {
     setTimeout(() => {
         $(inputField).parent().removeClass('shake');
     }, 1000);
+    $(caveInputField).addClass('shake');
+    setTimeout(() => {
+        $(caveInputField).removeClass('shake');
+    }, 1000);
 }
 
 function startCaveSection(status) {
+    $('.choice-label').hide();
     console.log('cave status: ', status);
     setTimeout(() => {
         shakeBodyAndFadeInElderFish();
-        // TODO: start elder fish dialogue featuring status
-            // left strange fish
-                // questionaire?
-            // took strange fish
-                // simple rpg battle using static set of fish for now
-            // fed strange fish
-                // trivia?
-        // TODO: last game depends on status
+        $("#caveDialogueContainer").fadeIn();
+        if (status == 'left') {
+            $("#elderFishDialogue").text("The creature before you makes a series of squeals and clicking noises that reverberate throughout the walls of the cave. You suspect the creature is trying to communicate. It smears bioluminscent ink along the walls:");
+            updateCaveChoices(null,"🐟 + 🐟","+ 🐟 = ", "?", 1);
+        } else if (status == 'taken') {
+            $("#elderFishDialogue").text("The strange fish you are carrying has become uneasy. You cannot tell if the strange fish is afraid or excited.");
+            updateCaveChoices(null,'<em>release</em> to release the Strange Fish.', '<em>kill</em> to stop the Strange Fish from struggling.', '<em>inspect</em> to check on the Strange Fish.', 1);
+        } else if (status == 'fed') {
+            $("#elderFishDialogue").html("The creature before you makes a series of squeals and piercing clicks that reverberate throughout the walls of the cave. You feel the clicks pass through you, rattling your bones, making it difficult to think, to speak, even to see. Any semblance of light in the cave is gone and with every click, thousands of images shine brightly in your mind's eye. <br />An image of a freshly cooked seafood seafood dinner comes to you. The clicks stop and you feel the Creature's gaze upon you, seemingly awaiting an answer.");
+            updateCaveChoices(null,'Tell the creature the dish looks "<em>tasty</em>".','"<em>Apologize</em>".','Ask the Creature a "<em>question</em>".', 1);
+        }
+        $("#elderFishDialogueContainer").fadeIn();
     }, 2000);
+}
+
+function updateCaveChoices(dialogue,left,center,right,round) {
+    $("#round").val(round);
+    if (dialogue) {
+        $("#elderFishDialogue").html(dialogue);
+    }
+    if (left) {
+        $('#leftChoiceLabel').html(left);
+    }
+    if (center) {
+        $('#centerChoiceLabel').html(center);
+    }
+    if (right) {
+        $('#rightChoiceLabel').html(right);
+    }
+}
+
+function updateAdditionalText(text) {
+    $("#additionalText").html(text);
+    $("#additionalText").fadeIn();
+    setTimeout(function() {
+        $("#additionalText").fadeOut();
+    }, 5000);
 }
 
 function shakeBodyAndFadeInElderFish() {
