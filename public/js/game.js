@@ -50,11 +50,12 @@ function handleCaveInput(inputValue, round) {
             '3', 'three', 'release', 'kill', 'inspect', 'tasty', 'apologize', 'question', 'leave', 'run', 'flee', 'help', 'fight', 'attack'
         ],
         '2': [
-            'who', 'why', 'what'
-        ],
-        '3': [],
-        '4': [],
-        '5': []
+            'focus', 'fight', 'flee', 'religion', 'religious icons', 'religious symbols', 'religions', 'religious', 'study', 'sell', 'laugh', 'cry', 'silent', 'chaos', 'order', 'spirals'
+        ]
+        // TODO: future paths and endings
+        //'3': [],
+        //'4': [],
+        //'5': []
     };
 
     // validate responses
@@ -97,48 +98,61 @@ function handleCaveInput(inputValue, round) {
         if (round == 2) {
             switch(inputValue) {
                 case "focus":
+                    updateAdditionalText("The battle for the mind continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // darken page
                     // pulse animation
                     initializeGrid('focus');
                     break;
                 case "fight":
+                    updateAdditionalText("The battle for the mind continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // darken
                     // show health
                     // dice roll for attack, unwinnable
                     break;
                 case "flee":
+                    updateAdditionalText("The battle for the mind continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // darken page
                     // pulse animation
                     initializeGrid('flee');
                     break;
-                case "religion" || "religious symbols" || "religions" || "religious":
+                case "religion" || "religions icons" || "religious symbols" || "religions" || "religious":
+                    updateAdditionalText("The conversation continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     //updateCaveChoices("The creature seems pleased that you've have some understanding of religion.","","","",3);
                     break;
                 case "study":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // imprison, make screensaver
                     break;
                 case "sell":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // prepare for sell
                     break;
                 case "eat":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // prepare for meal
                     break;
                 case "laugh":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // jokes? release
                     break;
                 case "cry":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // comfort, release
                     break;
                 case "silent":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     //  comfort, release
                     break;
                 case "chaos":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // universe ending
                     break;
                 case "order":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // universe ending
                     break;
                 case "spirals":
+                    updateAdditionalText("The convesration continues... but unfortunately the journey ends here. For now, at least. Review the status of this in-progress experiment here: <a href='https://trello.com/b/CfvFi9hr/pftf-todo'>PFTF Roadmap</a>");
                     // madness ending
                     break;
             }
@@ -288,9 +302,9 @@ function renderResponseDialogue(response) {
 }
 
 function shakeInput() {
-    $(inputField).parent().addClass('shake');
+    $(inputField).addClass('shake');
     setTimeout(() => {
-        $(inputField).parent().removeClass('shake');
+        $(inputField).removeClass('shake');
     }, 1000);
     $(caveInputField).addClass('shake');
     setTimeout(() => {

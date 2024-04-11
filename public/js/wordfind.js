@@ -59,10 +59,25 @@ function initializeGrid(focusOrFlee) {
     initializeGrid();
     updateTimer();
     setInterval(randomizeLetters, 3000);
+
+    const inputField = document.getElementById('wordFindInput');
+    inputField.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const userInput = inputField.value.toUpperCase(); // Convert input to uppercase to match the word format
+            if (userInput === selectedWord) {
+                console.log('win condition triggered');
+                // TODO: trigger win modal
+                // Handle the win condition here
+            } else {
+                console.log('Incorrect word. Try again!');
+            }
+            inputField.value = '';
+        }
+    });
 }
 
-function showModal(focusOrFlee) {
-    //TODO: focusOrFlee and success/failure determines language / imagery here
+function showModal(focusOrFlee, winOrLose) {
+    // TODO: focusOrFlee and success/failure determines language / imagery here
     let modal = document.getElementById('fullPageModal');
     let resultText = document.getElementById('resultText');
     let html = '<div class="container text-center">';
@@ -94,7 +109,7 @@ function showModal(focusOrFlee) {
 
     modal.style.display = 'block';
                 
-    // Listen for 'i' keypress to close the modal
+    // TODO: update depending on language used - might need to listen for different letters here
     document.addEventListener('keydown', function(event) {
         if (event.key === 'i' || event.key === 'I') {
             //TODO: trigger sound

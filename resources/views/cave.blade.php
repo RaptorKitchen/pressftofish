@@ -13,6 +13,9 @@
                     <div id="wordTimer">Time left: <span id="time">60</span> seconds</div>
                 </div>
                 <div id="wordfindGridContainer"></div>
+                <div id="wordFindInputContainer">
+                    <input type="text" id="wordFindInput" />
+                </div>
             </div>
             <div class="modal-content">
                 <div class="close"></div>
